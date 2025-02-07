@@ -9,6 +9,8 @@ import Logout from './components/logout/Logout.jsx'
 import CreateProduct from './components/create/CreateProduct.jsx'
 import Catalog from './components/catalog/Catalog.jsx'
 import Details from './components/details/Details.jsx'
+import EditProduct from './components/edit-product/EditProduct.jsx'
+
 
 function App() {
 
@@ -24,6 +26,7 @@ function App() {
           <Route path='/create' element={<CreateProduct />} />
           <Route path='catalog' element={<Catalog />} />
           <Route path='/details/:id' element={<Details />} />
+          <Route path='/edit/:id' element={<EditProduct />} />
         </Routes>
       </Router>
     </>
