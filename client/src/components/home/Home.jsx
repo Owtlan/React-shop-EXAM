@@ -56,6 +56,8 @@ export default function Home() {
 
 
             <Catalog category={category} />
+
+            
         </>
 
     )
