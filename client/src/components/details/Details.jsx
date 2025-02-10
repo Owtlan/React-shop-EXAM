@@ -2,7 +2,7 @@ import { doc, getDoc, deleteDoc, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { db } from "../../firebase-config";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 
 import { useNavigate } from "react-router-dom";
@@ -14,9 +14,9 @@ export default function Details() {
     const { id } = useParams()
     const [product, setProduct] = useState(null)
     const [loading, setLoading] = useState(true)
-
+    const [currentUser, setCurrentUser] = useState(null);
     const auth = getAuth();
-    const currentUser = auth.currentUser;
+
     const navigate = useNavigate()
 
     const isOwner = currentUser && product?.userId === currentUser.uid
@@ -24,10 +24,13 @@ export default function Details() {
 
 
     useEffect(() => {
-        const docRef = doc(db, "products", id);
+        const unsubscribeAuth = onAuthStateChanged(getAuth(), (user) => {
+            setCurrentUser(user);
+        });
 
-        // 📌 Следим промени в реално време
-        const unsubscribe = onSnapshot(docRef, (docSnap) => {
+        // Зареждаме продукта
+        const docRef = doc(db, "products", id);
+        const unsubscribeProduct = onSnapshot(docRef, (docSnap) => {
             if (docSnap.exists()) {
                 setProduct({ id: docSnap.id, ...docSnap.data() });
             } else {
@@ -37,7 +40,10 @@ export default function Details() {
             setLoading(false);
         });
 
-        return () => unsubscribe();
+        return () => {
+            unsubscribeAuth();
+            unsubscribeProduct();
+        };
     }, [id])
 
     if (loading) {
@@ -84,7 +90,7 @@ export default function Details() {
                     </div>
                 )}
 
-                {product.userId !== getAuth().currentUser?.uid && (
+                {currentUser && product.userId !== getAuth().currentUser?.uid && (
                     <>
                         <LikeButton productId={product.id} likedBy={product.likedBy || []} />
                         <p className="text-gray-700 mt-2">❤️ {product.likedBy?.length || 0} харесвания</p>
