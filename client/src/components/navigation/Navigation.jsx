@@ -15,7 +15,6 @@ const Navbar = () => {
             <ul className="flex space-x-6">
                 <li><Link to="/" className="text-white text-lg font-semibold hover:text-orange-500 transition-colors">Начало</Link></li>
                 <li><Link to="/catalog" className="text-white text-lg font-semibold hover:text-orange-500 transition-colors">Каталог</Link></li>
-                <li><Link to="/about" className="text-white text-lg font-semibold hover:text-orange-500 transition-colors">За нас</Link></li>
                 {!isAuthenticated && (
                     <>
                         <li><Link to="/register" className="bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 transition-colors">Регистрация</Link></li>
@@ -25,6 +24,7 @@ const Navbar = () => {
                 {isAuthenticated && (
                     <>
                         <li><Link to="/create" className="text-white text-lg font-semibold hover:text-orange-500 transition-colors">Създай</Link></li>
+                        <li><Link to="/users" className="text-white text-lg font-semibold hover:text-orange-500 transition-colors">Потребители</Link></li>
                         <li><Logout /></li>
                     </>
                 )}
