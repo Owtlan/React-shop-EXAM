@@ -3,7 +3,7 @@ import { useState } from "react"
 import { auth, db } from '../../firebase-config'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { useNavigate } from "react-router-dom"
-import { collection, addDoc } from "firebase/firestore"
+import { collection, addDoc, setDoc, doc } from "firebase/firestore"
 
 export default function Register() {
     const [email, setEmail] = useState("")
@@ -27,12 +27,18 @@ export default function Register() {
             const user = userCredential.user
 
 
-            await addDoc(collection(db, "users"), {
-                uid: user.uid,
+            // await setDoc(collection(db, "users"), {
+            //     uid: user.uid,
+            //     email: user.email,
+            //     createdAt: new Date(),
+            //     isOnline: false,
+            // })
+
+            await setDoc(doc(db, "users", user.uid), {
                 email: user.email,
                 createdAt: new Date(),
-            })
-
+                isOnline: false,
+            });
             console.log("Потребителят е добавен в Firestore!");
             navigate('/')
 
