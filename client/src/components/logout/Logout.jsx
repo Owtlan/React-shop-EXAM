@@ -1,7 +1,7 @@
 import { signOut } from "firebase/auth";
 import { auth, db } from "../../firebase-config";
 import { useNavigate } from "react-router-dom";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 
 
 export default function Logout() {
@@ -12,15 +12,22 @@ export default function Logout() {
 
         const userRef = doc(db, "users", auth.currentUser.uid)
 
+
         try {
+            // 🔹 Проверяваме дали документът съществува
+            const userDoc = await getDoc(userRef);
 
-            await updateDoc(userRef, { isOnline: false })
+            if (userDoc.exists()) {
+                await updateDoc(userRef, { isOnline: false });
+            } else {
+                console.warn("⚠️ Потребителският документ не съществува в Firestore.");
+            }
 
-            await signOut(auth)
-            console.log("Успешно излизане!");
-            navigate('/')
+            await signOut(auth);
+            console.log("✅ Успешно излизане!");
+            navigate("/");
         } catch (error) {
-            console.error("Грешка при излизане: ", error.message)
+            console.error("❌ Грешка при излизане: ", error.message);
         }
     };
 
