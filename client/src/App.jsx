@@ -10,7 +10,9 @@ import CreateProduct from './components/create/CreateProduct.jsx'
 import Catalog from './components/catalog/Catalog.jsx'
 import Details from './components/details/Details.jsx'
 import EditProduct from './components/edit-product/EditProduct.jsx'
-
+import Chat from './components/chat/Chat.jsx'
+import UsersPage from './components/usersPage/UsersPage.jsx'
+import Checkout from './components/checkout/Checkout.jsx'
 
 function App() {
 
@@ -27,6 +29,9 @@ function App() {
           <Route path='catalog' element={<Catalog />} />
           <Route path='/details/:id' element={<Details />} />
           <Route path='/edit/:id' element={<EditProduct />} />
+          <Route path="/users" element={<UsersPage />} /> {/* Страница с потребители */}
+          <Route path="/Checkout" element={<Checkout />} />
+          <Route path='/chat/:userId' element={<Chat />} />
         </Routes>
       </Router>
     </>
