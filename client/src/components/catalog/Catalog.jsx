@@ -6,7 +6,7 @@ import Details from "../details/Details";
 import { Link } from "react-router-dom";
 import LikeButton from "../like/LikeButton";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-
+import { useCart } from "../../context/CartContext";
 
 
 export default function Catalog({ category }) {
@@ -14,12 +14,14 @@ export default function Catalog({ category }) {
     const [loading, setLoading] = useState(true);
     const [selectedCategory, setSelectedCategory] = useState('');
     const testDetail = <Details />
-   
-    const [currentUser, setCurrentUser] = useState(null); 
+    const { addToCart } = useCart();
+
+
+    const [currentUser, setCurrentUser] = useState(null);
 
 
     useEffect(() => {
-      const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
+        const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
             setCurrentUser(user);
         });
 
@@ -122,6 +124,12 @@ export default function Catalog({ category }) {
                                     <p className="text-gray-700 mt-2 flex justify-end">❤️ {product.likedBy?.length || 0} харесвания</p>
                                 </>
                             )}
+
+
+                            <button
+                                onClick={() => addToCart(product)}
+                                className="mt-2 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
+                            >Купи</button>
 
                         </div>
 
