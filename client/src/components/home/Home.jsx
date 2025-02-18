@@ -33,7 +33,41 @@ export default function Home() {
                 <button onClick={() => setCategory("Мъжки Тениски")} className="bg-blue-500 text-white p-2 m-2 rounded">Мъжки Тениски</button>
                 <button onClick={() => setCategory("Женски Тениски")} className="bg-blue-500 text-white p-2 m-2 rounded">Женски Тениски</button>
                 <button onClick={() => setCategory("")} className="bg-blue-500 text-white p-2 m-2 rounded">Всички Продукти</button>
-            </div>
+
+
+
+
+                {/* 
+                <div
+                    className="hover:scale-x-105 transition-all duration-300 *:transition-all *:duration-300 flex justify-center text-2xl items-center shadow-xl z-10 bg-[#e8e4df] dark:bg-[#191818] gap-2 p-2 rounded-full"
+                >
+                    <button onClick={() => setCategory("Мъжки Обувки")}
+                        className="before:hidden hover:before:flex before:justify-center before:items-center before:h-4 before:text-[.6rem] before:px-1 before:content-['Cheer'] before:bg-black dark:before:bg-white dark:before:text-black before:text-white before:bg-opacity-50 before:absolute before:-top-7 before:rounded-lg hover:-translate-y-5 cursor-pointer hover:scale-125 bg-white dark:bg-[#191818] rounded-full p-2 px-3"
+                    >Мъжки Обувки 🥾
+                    </button>
+                    <button onClick={() => setCategory("Мъжки Якета")}
+                        className="before:hidden hover:before:flex before:justify-center before:items-center before:h-4 before:text-[.6rem] before:px-1 before:content-['Cheer'] before:bg-black dark:before:bg-white dark:before:text-black before:text-white before:bg-opacity-50 before:absolute before:-top-7 before:rounded-lg hover:-translate-y-5 cursor-pointer hover:scale-125 bg-white dark:bg-[#191818] rounded-full p-2 px-3"
+                    >Мъжки Якета 🧥
+                    </button>
+                    <button onClick={() => setCategory("Дамски Обувки")}
+                        className="before:hidden hover:before:flex before:justify-center before:items-center before:h-4 before:text-[.6rem] before:px-1 before:content-['Cheer'] before:bg-black dark:before:bg-white dark:before:text-black before:text-white before:bg-opacity-50 before:absolute before:-top-7 before:rounded-lg hover:-translate-y-5 cursor-pointer hover:scale-125 bg-white dark:bg-[#191818] rounded-full p-2 px-3"
+                    >Дамски Обувки 👠
+                    </button>
+                    <button onClick={() => setCategory("Женски Якета")}
+                        className="before:hidden hover:before:flex before:justify-center before:items-center before:h-4 before:text-[.6rem] before:px-1 before:content-['Cheer'] before:bg-black dark:before:bg-white dark:before:text-black before:text-white before:bg-opacity-50 before:absolute before:-top-7 before:rounded-lg hover:-translate-y-5 cursor-pointer hover:scale-125 bg-white dark:bg-[#191818] rounded-full p-2 px-3"
+                    >Женски Якета 👗
+                    </button>
+                    <button onClick={() => setCategory("Мъжки Тениски")}
+                        className="before:hidden hover:before:flex before:justify-center before:items-center before:h-4 before:text-[.6rem] before:px-1 before:content-['Cheer'] before:bg-black dark:before:bg-white dark:before:text-black before:text-white before:bg-opacity-50 before:absolute before:-top-7 before:rounded-lg hover:-translate-y-5 cursor-pointer hover:scale-125 bg-white dark:bg-[#191818] rounded-full p-2 px-3"
+                    >Мъжки Тениски 👕
+                    </button>
+                    <button onClick={() => setCategory("Женски Тениски")}
+                        className="before:hidden hover:before:flex before:justify-center before:items-center before:h-4 before:text-[.6rem] before:px-1 before:content-['Cheer'] before:bg-black dark:before:bg-white dark:before:text-black before:text-white before:bg-opacity-50 before:absolute before:-top-7 before:rounded-lg hover:-translate-y-5 cursor-pointer hover:scale-125 bg-white dark:bg-[#191818] rounded-full p-2 px-3"
+                    >Женски Тениски 👚
+                    </button>
+                </div> */}
+
+            </div >
 
             <Catalog category={category} />
         </>
