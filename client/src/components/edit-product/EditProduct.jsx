@@ -12,7 +12,7 @@ export default function EditProduct() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [product, setProduct] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
 
@@ -30,6 +30,8 @@ export default function EditProduct() {
         const fetchProduct = async () => {
 
             if (!currentUser) return;
+
+            setLoading(true)
 
             try {
                 // da pitam bota za tova
@@ -55,7 +57,7 @@ export default function EditProduct() {
                 setError("Грешка при зареждане на продукта.");
 
             } finally {
-                setLoading(false);
+                setLoading(false)
             }
         };
 
@@ -72,6 +74,7 @@ export default function EditProduct() {
         }
 
         try {
+
             const productRef = doc(db, "products", id);
             await updateDoc(productRef, {
                 name,
@@ -86,7 +89,22 @@ export default function EditProduct() {
         }
     };
 
-    if (loading) return <p className="text-center text-lg mt-10">Зареждане...</p>;
+    if (loading) {
+        return (
+
+            <div className="flex-col gap-4 w-full flex items-center justify-center">
+                <div
+                    className="w-20 h-20 border-4 border-transparent text-blue-400 text-4xl animate-spin flex items-center justify-center border-t-blue-400 rounded-full"
+                >
+                    <div
+                        className="w-16 h-16 border-4 border-transparent text-red-400 text-2xl animate-spin flex items-center justify-center border-t-red-400 rounded-full"
+                    ></div>
+                </div>
+            </div>
+
+        )
+    }
+
     if (error) return <p className="text-center text-lg mt-10 text-red-500">{error}</p>;
 
 
