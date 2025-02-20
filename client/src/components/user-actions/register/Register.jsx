@@ -1,5 +1,5 @@
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { auth, db } from '../../../firebase-config'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { useNavigate } from "react-router-dom"
@@ -7,12 +7,16 @@ import { collection, addDoc, setDoc, doc } from "firebase/firestore"
 
 export default function Register() {
     const [email, setEmail] = useState("")
+    const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
     const [error, setError] = useState("")
     const navigate = useNavigate()
 
+    console.log("Email:", email);
+    console.log("Username:", username);
 
+ 
 
     const handleRegister = async (e) => {
         e.preventDefault()
@@ -27,15 +31,9 @@ export default function Register() {
             const user = userCredential.user
 
 
-            // await setDoc(collection(db, "users"), {
-            //     uid: user.uid,
-            //     email: user.email,
-            //     createdAt: new Date(),
-            //     isOnline: false,
-            // })
-
             await setDoc(doc(db, "users", user.uid), {
                 email: user.email,
+                username: username,
                 createdAt: new Date(),
                 isOnline: false,
             });
@@ -70,10 +68,25 @@ export default function Register() {
                             />
                         </div>
 
+                        <div>
+                            <label className="block mb-1">потребителско име</label>
+
+                            <input
+                                type="username"
+                                className="w-full p-2 border rounded"
+                                placeholder="Въведете потребителско име"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                required
+                            />
+                        </div>
+
+
                         <div className="mt-3">
                             <label className="block mb-1">Парола</label>
                             <input
                                 type="password"
+                                autoComplete="new-password"
                                 className="w-full p-2 border rounded"
                                 placeholder="Въведете парола"
                                 value={password}
