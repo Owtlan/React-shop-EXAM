@@ -7,6 +7,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import { useNavigate } from "react-router-dom";
 import LikeButton from "../like/LikeButton";
+import { useCart } from "../../context/CartContext";
 
 
 export default function Details() {
@@ -18,6 +19,8 @@ export default function Details() {
     const auth = getAuth();
 
     const navigate = useNavigate()
+    const { addToCart } = useCart()
+  
 
     const isOwner = currentUser && product?.userId === currentUser.uid
 
@@ -156,6 +159,13 @@ export default function Details() {
                     <>
                         <LikeButton productId={product.id} likedBy={product.likedBy || []} />
                         <p className="text-gray-700 mt-2">❤️ {product.likedBy?.length || 0} харесвания</p>
+                        <button
+                            onClick={() => addToCart(product)}
+                            className="mt-2 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
+
+                        >
+                            Купи
+                        </button>
                     </>
                 )}
 
