@@ -52,6 +52,7 @@ export default function Login() {
                             <label className="block mb-1">Парола</label>
                             <input
                                 type="password"
+                                autoComplete="new-password"
                                 className="w-full p-2 border rounded"
                                 placeholder="Въведете парола"
                                 value={password}
