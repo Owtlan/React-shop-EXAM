@@ -14,6 +14,13 @@ export default function Login() {
 
     const handleLogin = async (e) => {
         e.preventDefault()
+        setError("");
+
+
+        if (!email || !password) {
+            setError("Моля, попълнете всички полета.")
+            return;
+        }
 
 
         try {
@@ -23,7 +30,25 @@ export default function Login() {
             navigate('/')
         } catch (error) {
             console.error("Грешка при влизането: ", error.message);
-            setError('Невалидни данни за вход. Моля, опитайте отново.')
+
+            switch (error.code) {
+                case "auth/invalid-email":
+                    setError("Невалиден формат на имейла.");
+                    break;
+                case "auth/user-disabled":
+                    setError("Този акаунт е деактивиран.");
+                    break;
+                case "auth/user-not-found":
+                    setError("Няма потребител с този имейл.");
+                    break;
+                case "auth/wrong-password":
+                    setError("Грешна парола.");
+                    break;
+                default:
+                    setError("Неуспешно влизане. Опитайте отново.");
+
+            }
+
         }
     };
 
