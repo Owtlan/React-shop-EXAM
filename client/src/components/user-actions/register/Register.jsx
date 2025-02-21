@@ -13,13 +13,36 @@ export default function Register() {
     const [error, setError] = useState("")
     const navigate = useNavigate()
 
-    console.log("Email:", email);
-    console.log("Username:", username);
 
- 
+    const isValidEmail = (email) => {
+        return email.endsWith("@abv.bg") || email.endsWith("@gmail.com");
+    };
+
+
+    const isValidUsername = (username) => /^[a-zA-Z0-9]+$/.test(username);
+
+    const isValidPassword = (password) => /^[a-zA-Z0-9]{6,}$/.test(password);
+
 
     const handleRegister = async (e) => {
         e.preventDefault()
+        setError("");
+
+
+        if (!isValidEmail(email)) {
+            setError("Позволени са само имейли с @abv.bg и @gmail.com.");
+            return;
+        }
+
+        if (!isValidUsername(username)) {
+            setError("Потребителското име може да съдържа само букви и цифри.");
+            return;
+        }
+
+        if (!isValidPassword(password)) {
+            setError("Паролата трябва да е поне 6 символа и да съдържа само букви и цифри.");
+            return;
+        }
 
         if (password !== confirmPassword) {
             setError("Паролите не съвпадат.");
@@ -43,8 +66,20 @@ export default function Register() {
         } catch (error) {
             console.error("Грешка при регистрацията: ", error.message);
 
+            switch (error.code) {
+                case "auth/email-already-in-use":
+                    setError("Този имейл вече е използван.");
+                    break;
+                case "auth/invalid-email":
+                    setError("Невалиден Формат на имейла.")
+                    break;
+                case "auth/weak-password":
+                    setError("Паролата е твърде слаба.")
+                    break;
+                default:
+                    setError("Възникна грешка при регистрацията. Опитайте отново.")
+            }
         }
-
     }
 
 
@@ -72,7 +107,7 @@ export default function Register() {
                             <label className="block mb-1">потребителско име</label>
 
                             <input
-                                type="username"
+                                type="text"
                                 className="w-full p-2 border rounded"
                                 placeholder="Въведете потребителско име"
                                 value={username}
