@@ -31,7 +31,12 @@ export default function UsersPage() {
 
                 if (docSnap.exists()) {
                     // 🔥 Маркираме потребителя като онлайн
-                    await updateDoc(userRef, { isOnline: true });
+                    const isCurrentlyOnline = docSnap.data().isOnline;
+
+                    if (!isCurrentlyOnline) { // 🔥 Само ако не е онлайн
+                        await updateDoc(userRef, { isOnline: true });
+                        console.log("🔵 Потребителят е отбелязан като онлайн.");
+                    }
                 } else {
                     console.warn("Документът за този потребител не съществува!");
                 }
@@ -60,7 +65,17 @@ export default function UsersPage() {
     const offlineUsers = users.filter(user => !user.isOnline);
 
     if (loading) {
-        return <div className="text-center text-lg mt-10">Зареждане...</div>;
+        return (
+            <div className="flex items-center justify-center h-screen">
+                <div
+                    className="w-20 h-20 border-4 border-transparent text-blue-400 text-4xl animate-spin flex items-center justify-center border-t-blue-400 rounded-full"
+                >
+                    <div
+                        className="w-16 h-16 border-4 border-transparent text-red-400 text-2xl animate-spin flex items-center justify-center border-t-red-400 rounded-full"
+                    ></div>
+                </div>
+            </div>
+        )
     }
 
     return (
