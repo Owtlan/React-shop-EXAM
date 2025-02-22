@@ -25,11 +25,14 @@ export default function GuestGuard({ children }) {
 
     if (loading) {
         return (
-            <div className="flex flex-col gap-4 w-full items-center justify-center">
-                <div className="w-20 h-20 border-4 border-transparent animate-spin border-t-blue-400 rounded-full">
-                    <div className="w-16 h-16 border-4 border-transparent animate-spin border-t-red-400 rounded-full"></div>
+            <div className="flex items-center justify-center h-screen">
+                <div
+                    className="w-20 h-20 border-4 border-transparent text-blue-400 text-4xl animate-spin flex items-center justify-center border-t-blue-400 rounded-full"
+                >
+                    <div
+                        className="w-16 h-16 border-4 border-transparent text-red-400 text-2xl animate-spin flex items-center justify-center border-t-red-400 rounded-full"
+                    ></div>
                 </div>
-                <p>Зареждане...</p>
             </div>
         );
     }
