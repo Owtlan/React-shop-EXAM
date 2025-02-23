@@ -36,7 +36,7 @@ const Navbar = () => {
     }, [])
 
     return (
-        <nav className={`bg-gray-800 bg-opacity-90 p-4 fixed top-0 w-full transition-opacity duration-300 ${showNavBar ? "opacity-100" : "opacity-0"
+        <nav className={`bg-gray-800 bg-opacity-90 p-4 fixed top-0 w-full transition-opacity duration-300 z-50 ${showNavBar ? "opacity-100" : "opacity-0"
             }`}
         >
             <ul className="flex space-x-6">
