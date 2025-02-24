@@ -20,7 +20,7 @@ export default function Details() {
 
     const navigate = useNavigate()
     const { addToCart } = useCart()
-  
+
 
     const isOwner = currentUser && product?.userId === currentUser.uid
 
@@ -50,7 +50,17 @@ export default function Details() {
     }, [id])
 
     if (loading) {
-        return <p className="text-center text-lg mt-10">Зареждане...</p>;
+        return (
+            <div className="flex items-center justify-center h-screen">
+                <div
+                    className="w-20 h-20 border-4 border-transparent text-blue-400 text-4xl animate-spin flex items-center justify-center border-t-blue-400 rounded-full"
+                >
+                    <div
+                        className="w-16 h-16 border-4 border-transparent text-red-400 text-2xl animate-spin flex items-center justify-center border-t-red-400 rounded-full"
+                    ></div>
+                </div>
+            </div>
+        )
     }
 
     if (!product) {
