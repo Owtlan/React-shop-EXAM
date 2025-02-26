@@ -70,7 +70,7 @@ export default function CreateProduct() {
                 imageUrl,
                 category,
                 createdAt: new Date(),
-                userId: user.uid
+                userId: user.uid,
             });
 
             console.log("Продуктът е добавен успешно!");
