@@ -18,7 +18,7 @@ export default function Footer() {
                     {/* Навигация */}
                     <nav className="flex flex-wrap justify-center gap-6 text-sm">
                         <Link to="/" className="hover:text-gray-400 duration-300">Начало</Link>
-                        <Link to="/products" className="hover:text-gray-400 duration-300">Продукти</Link>
+                        <Link to="/" className="hover:text-gray-400 duration-300">Продукти</Link>
                         <Link to="/about" className="hover:text-gray-400 duration-300">За нас</Link>
                         <Link to="/contact" className="hover:text-gray-400 duration-300">Контакт</Link>
                     </nav>
