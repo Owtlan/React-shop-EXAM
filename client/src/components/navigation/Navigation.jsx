@@ -36,7 +36,7 @@ const Navbar = () => {
     }, [])
 
     return (
-        <nav className={`bg-gray-800 bg-opacity-90 p-4 fixed top-0 w-full transition-opacity duration-300 z-50 ${showNavBar ? "opacity-100" : "opacity-0"
+        <nav className={`flex sm:items-center sm:flex-col md:flex-col lg:flex-row bg-gray-800 bg-opacity-90 p-4 fixed top-0 w-full transition-opacity duration-300 z-50 ${showNavBar ? "opacity-100" : "opacity-0"
             }`}
         >
             <ul className="flex space-x-6">
@@ -98,15 +98,15 @@ const Navbar = () => {
                         </li>
                     </>
                 )}
-                {isAuthenticated && (
-                    <div className="flex items-center space-x-4 ml-auto">
-                        <li className="text-amber-50 font-bold">Email: {auth.currentUser.email}</li>
-
-                        <ThemeToggle />
-                        <li><Logout /></li>
-                    </div>
-                )}
             </ul>
+            {isAuthenticated && (
+                <div className="flex items-center space-x-4 lg:ml-auto list-none">
+                    <li className="text-amber-50 font-bold">Email: {auth.currentUser.email}</li>
+
+                    <ThemeToggle />
+                    <li><Logout /></li>
+                </div>
+            )}
 
 
         </nav>
