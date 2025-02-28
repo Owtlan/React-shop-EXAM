@@ -13,6 +13,8 @@ export default function Catalog({ category, showLiked, ratingFilter }) {
 
     const [currentUser, setCurrentUser] = useState(null);
 
+
+
     useEffect(() => {
         const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
             setCurrentUser(user);
@@ -43,7 +45,8 @@ export default function Catalog({ category, showLiked, ratingFilter }) {
                 (product.likedBy?.length || 0) <= ratingFilter[1];
         });
 
-
+   
+    const displayProducts = filteredProducts.length > 5 ? filteredProducts.slice(0, 8) : filteredProducts;
 
     if (loading) {
         return (
@@ -67,11 +70,16 @@ export default function Catalog({ category, showLiked, ratingFilter }) {
     return (
         <div className="container mx-auto p-8">
             <h2 className="text-3xl font-semibold text-center mb-6">Каталог</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                {filteredProducts.map((product) => (
-                    <div key={product.id} className="bg-white p-4 shadow-lg rounded-lg">
+
+
+
+            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6">
+                {displayProducts.map((product) => (
+                    <div key={product.id} className="bg-white p-4 shadow-lg rounded-lg
+                  text-sm sm:sm:text-lg
+                     ">
                         <img src={product.imageUrl} alt={product.name} className="w-full h-40 object-contain rounded" />
-                        <h3 className="text-xl font-semibold mt-3">{product.name}</h3>
+                        <h3 className="font-semibold mt-3">{product.name}</h3>
 
                         <Link to={`/details/${product.id}`} className="">
                             <button
@@ -93,7 +101,7 @@ export default function Catalog({ category, showLiked, ratingFilter }) {
                                 <span
                                     className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-gray-200"
                                 ></span>
-                                <span className="relative text-base font-semibold">Детайли !</span>
+                                <span className="relative font-semibold text-sm sm:text-base">Детайли !</span>
                             </button>
                         </Link>
                         <p className="text-lg font-bold text-blue-500 mt-2">{product.price} лв.</p>
