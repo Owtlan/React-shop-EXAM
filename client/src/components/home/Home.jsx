@@ -41,7 +41,7 @@ export default function Home() {
     return (
         <div className="flex min-h-screen sm:pt-10 lg:pt-0">
             {/* Sidebar */}
-            <div className="w-full lg:w-1/6 md:w-1/4 sm:w-1/4 p-4 bg-gray-100 min-h-screen">
+            <div className="w-2/6 lg:w-1/6 md:w-1/4 sm:w-1/4 p-4 bg-gray-100 min-h-screen">
                 <div className="max-w-xs mx-auto">
                     <h3 className="text-xl font-bold mb-4">Филтриране</h3>
                     <button
@@ -64,7 +64,7 @@ export default function Home() {
                     ))}
                 </div>
                 {/* Филтриращи бутони за категории */}
-                <div className="flex flex-col w-full pt-6 mx-auto sm:text-xs md:text-sm lg:text-sm xl:text-base">
+                <div className="flex flex-col w-full pt-6 mx-auto text-sm sm:text-xs md:text-sm lg:text-sm xl:text-base">
                     <button
                         className="bg-black text-white border border-gray-600 border-b-4 font-medium overflow-hidden relative px-4 py-2 rounded-md hover:brightness-150 hover:border-t-4 hover:border-b active:opacity-75 outline-none duration-300 group"
                         onClick={() => setCategory("Мъжки Обувки")}
