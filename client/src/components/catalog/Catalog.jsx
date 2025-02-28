@@ -13,6 +13,8 @@ export default function Catalog({ category, showLiked, ratingFilter }) {
 
     const [currentUser, setCurrentUser] = useState(null);
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const productsPerPage = 4;
 
 
     useEffect(() => {
@@ -45,8 +47,15 @@ export default function Catalog({ category, showLiked, ratingFilter }) {
                 (product.likedBy?.length || 0) <= ratingFilter[1];
         });
 
-   
-    const displayProducts = filteredProducts.length > 5 ? filteredProducts.slice(0, 8) : filteredProducts;
+
+    const indexOfLastProduct = currentPage * productsPerPage
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct)
+
+    const totalPages = Math.ceil(filteredProducts.length / productsPerPage)
+
+    // test s 4 inache iskam 8
+    // const displayProducts = filteredProducts.length > 5 ? filteredProducts.slice(0, 8) : filteredProducts;
 
     if (loading) {
         return (
@@ -74,7 +83,7 @@ export default function Catalog({ category, showLiked, ratingFilter }) {
 
 
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6">
-                {displayProducts.map((product) => (
+                {currentProducts.map((product) => (
                     <div key={product.id} className="bg-white p-4 shadow-lg rounded-lg
                   text-sm sm:sm:text-lg
                      ">
@@ -120,6 +129,15 @@ export default function Catalog({ category, showLiked, ratingFilter }) {
                         )}
                     </div>
                 ))}
+            </div>
+
+            <div className="flex justify-center mt-4">
+                <button
+                    onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                    className="px-4 py-2 bg-gray-800 text-white rounded-lg ml-2"
+                >
+                    Следваща
+                </button>
             </div>
         </div>
     );
