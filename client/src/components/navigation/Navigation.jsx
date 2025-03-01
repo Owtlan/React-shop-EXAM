@@ -13,7 +13,6 @@ const Navbar = () => {
     const { cart, removeFromCart } = useCart()
     const totalPrice = cart.reduce((sum, product) => sum + product.price, 0)
     const auth = getAuth()
-    // console.log(auth.currentUser.email);
 
     const [showNavBar, setShowNavBar] = useState(true)
     const [lastScrollY, setLastScrollY] = useState(0)
