@@ -144,7 +144,7 @@ export default function Register() {
 
                         <button
                             type="submit"
-                            className="mt-4 w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition"
+                            className="mt-4 w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-600 transition"
                         >
                             Регистрация
                         </button>
