@@ -74,7 +74,7 @@ export default function Login() {
                         </div>
 
                         <div className="mt-3">
-                            <label className="block mb-2">Парола</label>
+                            <label className="block mb-1">Парола</label>
                             <input
                                 type="password"
                                 autoComplete="new-password"
@@ -88,7 +88,7 @@ export default function Login() {
 
                         <button
                             type="submit"
-                            className="mt-4 w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition"
+                            className="mt-4 w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-600 transition"
                         >
                             Вход
                         </button>
