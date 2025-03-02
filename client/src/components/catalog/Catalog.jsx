@@ -14,7 +14,7 @@ export default function Catalog({ category, showLiked, ratingFilter }) {
     const [currentUser, setCurrentUser] = useState(null);
 
     const [currentPage, setCurrentPage] = useState(1);
-    const productsPerPage = 4;
+    const productsPerPage = 8;
 
 
     useEffect(() => {
@@ -54,7 +54,7 @@ export default function Catalog({ category, showLiked, ratingFilter }) {
 
     const totalPages = Math.ceil(filteredProducts.length / productsPerPage)
 
-    // test s 4 inache iskam 8
+ 
     // const displayProducts = filteredProducts.length > 5 ? filteredProducts.slice(0, 8) : filteredProducts;
 
     if (loading) {
@@ -132,6 +132,25 @@ export default function Catalog({ category, showLiked, ratingFilter }) {
             </div>
 
             <div className="flex justify-center mt-4">
+
+                <button
+                    onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                    className="px-4 py-2 bg-gray-800 text-white rounded-lg mr-2"
+
+                >
+                    Предишна
+                </button>
+
+                {[...Array(totalPages)].map((_, index) => (
+                    <button
+                        key={index}
+                        onClick={() => setCurrentPage(index + 1)}
+                        className={`px-4 py-2 ${currentPage === index + 1 ? "bg-blue-500 text-white" : "bg-gray-200 text-black"} rounded-lg mx-1`}
+                    >
+                        {index + 1}
+                    </button>
+                ))}
+
                 <button
                     onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                     className="px-4 py-2 bg-gray-800 text-white rounded-lg ml-2"
