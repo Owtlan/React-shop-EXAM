@@ -77,7 +77,7 @@ export default function Catalog({ category, showLiked, ratingFilter }) {
     }
 
     return (
-        <div className="container mx-auto p-8">
+        <div className="container mx-auto pt-15 lg:p-8">
             <h2 className="text-3xl font-semibold text-center mb-6">Каталог</h2>
 
 
