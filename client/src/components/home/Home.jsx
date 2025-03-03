@@ -41,9 +41,9 @@ export default function Home() {
     return (
         <div className="flex min-h-screen sm:pt-10 lg:pt-0">
             {/* Sidebar */}
-            <div className="w-2/6 lg:w-1/6 md:w-1/4 sm:w-1/4 p-4 bg-gray-100 min-h-screen">
+            <div className="pt-15 sm:pt-10 w-2/6 lg:w-1/6 md:w-1/4 sm:w-1/4 p-4 bg-gray-100 min-h-screen">
                 <div className="max-w-xs mx-auto">
-                    <h3 className="text-xl font-bold mb-4">Филтриране</h3>
+                    <h3 className="sm:text-xl text-base font-bold mb-4">Филтриране</h3>
                     <button
                         className={`w-full py-2 mb-2 rounded ${showLiked ? "bg-blue-500 text-white" : "bg-gray-200 text-black"}`}
                         onClick={() => setShowLiked(!showLiked)}
@@ -110,7 +110,6 @@ export default function Home() {
                 </div>
             </div>
 
-            {/* Product Catalog (Отдясно) */}
             <div className="flex-1 p-4 max-w-screen-lg mx-auto">
                 <Catalog category={category} showLiked={showLiked} ratingFilter={ratingFilter} />
             </div>
