@@ -11,7 +11,7 @@ export default function Home() {
 
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
-    console.log("Rating filter:", ratingFilter);
+    // console.log("Rating filter:", ratingFilter);
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -23,7 +23,7 @@ export default function Home() {
             }));
             setUsers(userList);
             setLoading(false);
-            console.log("Loaded users:", userList);
+            // console.log("Loaded users:", userList);
         };
         fetchUsers();
     }, []);
