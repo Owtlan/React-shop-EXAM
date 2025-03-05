@@ -168,7 +168,6 @@ export default function Details() {
                 {currentUser && product.userId !== getAuth().currentUser?.uid && (
                     <>
                         <LikeButton productId={product.id} likedBy={product.likedBy || []} />
-                        <p className="text-gray-700 mt-2">❤️ {product.likedBy?.length || 0} харесвания</p>
                         <button
                             onClick={() => addToCart(product)}
                             className="mt-2 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
