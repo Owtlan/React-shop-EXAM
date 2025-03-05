@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import LikeButton from "../like/LikeButton";
 import { useCart } from "../../context/CartContext";
 import { onAuthStateChanged } from "firebase/auth";
+import 'animate.css'
 
 export default function Catalog({ category, showLiked, ratingFilter }) {
     const [products, setProducts] = useState([]);
@@ -54,7 +55,7 @@ export default function Catalog({ category, showLiked, ratingFilter }) {
 
     const totalPages = Math.ceil(filteredProducts.length / productsPerPage)
 
- 
+
     // const displayProducts = filteredProducts.length > 5 ? filteredProducts.slice(0, 8) : filteredProducts;
 
     if (loading) {
@@ -78,7 +79,7 @@ export default function Catalog({ category, showLiked, ratingFilter }) {
 
     return (
         <div className="container mx-auto pt-15 lg:p-8">
-            <h2 className="text-3xl font-semibold text-center mb-6">Каталог</h2>
+            <h2 className="text-3xl font-semibold text-center mb-6 text-lime-400 animate__animated animate__bounce">Каталог</h2>
 
 
 
@@ -117,14 +118,23 @@ export default function Catalog({ category, showLiked, ratingFilter }) {
 
                         {currentUser && product.userId !== currentUser?.uid && (
                             <>
-                                <LikeButton productId={product.id} likedBy={product.likedBy || []} />
-                                <p className="text-gray-700 mt-2 flex justify-end">❤️ {product.likedBy?.length || 0} харесвания</p>
-                                <button
-                                    onClick={() => addToCart(product)}
-                                    className="mt-2 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
-                                >
-                                    Купи
-                                </button>
+                                <div className="">
+                                    <LikeButton productId={product.id} likedBy={product.likedBy || []} />
+
+
+
+
+                                    <button
+                                        onClick={() => addToCart(product)}
+                                        className="relative inline-flex items-center justify-center px-8 py-3 text-lg font-semibold text-white transition-all duration-300 ease-in-out transform bg-gradient-to-r from-green-400 to-green-600 rounded-full shadow-lg group hover:scale-105 hover:rotate-3 hover:shadow-2xl"
+                                    >
+                                        <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-green-500 to-green-700 opacity-20 group-hover:opacity-0 transition-all duration-300 rounded-full"></span>
+                                        <span className="absolute inset-0 w-full h-full border-2 border-green-500 rounded-full group-hover:border-transparent transition-all duration-300"></span>
+                                        <span className="relative z-10">Купи сега</span>
+                                    </button>
+
+
+                                </div>
                             </>
                         )}
                     </div>
