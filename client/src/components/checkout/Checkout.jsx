@@ -20,17 +20,9 @@ const Checkout = () => {
         postalCode: ""
     });
 
-
-
-
-
     const handleChange = (e) => {
         setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
     }
-
-
-
-
 
     const handleOrderSubmit = async (e) => {
         e.preventDefault();
@@ -61,8 +53,6 @@ const Checkout = () => {
         }
     }
 
-
-
     if (loading) return (
         <div className="flex items-center justify-center h-screen">
             <div
@@ -90,8 +80,8 @@ const Checkout = () => {
                             {cart.map((product) => (
                                 <li key={product.id} className="flex items-center justify-between py-2 border-b">
                                     <img src={product.imageUrl} alt={product.name} className="w-12 h-12 object-contain" />
-                                    <p className="text-sm font-medium">{product.name}</p>
-                                    <p className="text-sm font-semibold">{product.price.toFixed(2)} лв.</p>
+                                    <p className="text-sm font-medium">{product.name} (x{product.quantity})</p> {/* Показване на количеството */}
+                                    <p className="text-sm font-semibold">{product.totalPrice.toFixed(2)} лв.</p> {/* Показване на общата цена */}
                                     <button
                                         onClick={() => removeFromCart(product.id)}
                                         className="border-2 border-black group hover:border-green-500 w-12 h-12 duration-500 overflow-hidden"
@@ -106,7 +96,7 @@ const Checkout = () => {
                         </ul>
 
                         <div className="mt-4 text-right font-semibold text-lg">
-                            Общо: {cart.reduce((sum, product) => sum + product.price, 0).toFixed(2)} лв.
+                            Общо: {cart.reduce((sum, product) => sum + product.totalPrice, 0).toFixed(2)} лв. {/* Показване на крайна сума */}
                         </div>
 
                         {/* 🔥 Формата се показва само ако има продукти в количката */}
