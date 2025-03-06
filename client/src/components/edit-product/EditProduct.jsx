@@ -142,6 +142,8 @@ export default function EditProduct() {
                             <option value="Дамски Обувки">Дамски Обувки</option>
                             <option value="Мъжки Тениски">Мъжки Тениски</option>
                             <option value="Женски Тениски">Женски Тениски</option>
+                            <option value="Женски Дънки">Женски Дънки</option>
+                            <option value="Мъжки Дънки">Мъжки Дънки</option>
                         </select>
                     </div>
 
