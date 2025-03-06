@@ -103,10 +103,23 @@ export default function Home() {
                     </button>
                     <button
                         className="bg-black text-white border border-gray-600 border-b-4 font-medium overflow-hidden relative px-4 py-2 rounded-md hover:brightness-110 hover:border-t-4 hover:border-b active:opacity-75 outline-none duration-300 group"
+                        onClick={() => setCategory("Женски Дънки")}
+                    >
+                        Женски Дънки
+                    </button>
+                    <button
+                        className="bg-black text-white border border-gray-600 border-b-4 font-medium overflow-hidden relative px-4 py-2 rounded-md hover:brightness-110 hover:border-t-4 hover:border-b active:opacity-75 outline-none duration-300 group"
+                        onClick={() => setCategory("Мъжки Дънки")}
+                    >
+                        Мъжки Дънки
+                    </button>
+                    <button
+                        className="bg-black text-white border border-gray-600 border-b-4 font-medium overflow-hidden relative px-4 py-2 rounded-md hover:brightness-110 hover:border-t-4 hover:border-b active:opacity-75 outline-none duration-300 group"
                         onClick={() => setCategory("")}
                     >
                         Всички Продукти
                     </button>
+
                 </div>
             </div>
 
