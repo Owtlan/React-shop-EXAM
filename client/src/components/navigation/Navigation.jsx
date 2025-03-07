@@ -69,12 +69,13 @@ const Navbar = () => {
                         <li><Link to="/users" className="text-base sm:text-lg font-semibold hover:text-orange-500 transition-colors">Потребители</Link></li>
 
                         {/* 🛒 Иконка за количка с hover меню */}
+                        {/* 🛒 Иконка за количка с hover меню */}
                         <li className="relative group">
                             <Link to="/checkout" className="relative">
                                 <span className="text-lg">🛒</span>
                                 {cart.length > 0 && (
                                     <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
-                                        {cart.length}
+                                        {cart.reduce((sum, product) => sum + product.quantity, 0)} {/* Покажи общия брой продукти */}
                                     </span>
                                 )}
                             </Link>
@@ -89,8 +90,8 @@ const Navbar = () => {
                                             {cart.map((product) => (
                                                 <li key={product.id} className="flex items-center justify-between py-2 border-b">
                                                     <img src={product.imageUrl} alt={product.name} className="w-10 h-10 object-contain pr-2" />
-                                                    <p className="text-sm">{product.name}</p>
-                                                    <p className="text-sm font-semibold">{product.price} лв.</p>
+                                                    <p className="text-sm">{product.name} (x{product.quantity})</p> {/* Показване на количеството */}
+                                                    <p className="text-sm font-semibold">{product.totalPrice.toFixed(2)} лв.</p> {/* Показване на общата цена */}
                                                     <button onClick={() => removeFromCart(product.id)} className="text-red-500 text-lg font-bold">✖</button>
                                                 </li>
                                             ))}
@@ -98,7 +99,7 @@ const Navbar = () => {
 
                                         {/* 🔹 Крайна сума */}
                                         <div className="mt-2 text-right font-semibold text-lg">
-                                            Общо: {totalPrice.toFixed(2)} лв.
+                                            Общо: {cart.reduce((sum, product) => sum + product.totalPrice, 0).toFixed(2)} лв. {/* Показване на крайна сума */}
                                         </div>
 
                                         {/* 🛒 Бутон "Поръчай" */}
@@ -109,6 +110,7 @@ const Navbar = () => {
                                 )}
                             </div>
                         </li>
+
                     </>
                 )}
                 {!isAuthenticated && (
@@ -118,14 +120,7 @@ const Navbar = () => {
                     </>
                 )}
             </ul>
-            {/* <div className={`md:flex ${isMobile ? (isMenuOpen ? "flex flex-col" : "hidden") : "flex"} space-x-6 text-white`}>
-                {!isAuthenticated && (
-                    <>
-                        <li><Link to="/register" className="bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 transition-colors">Регистрация</Link></li>
-                        <li><Link to="/login" className="bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 transition-colors">Вход</Link></li>
-                    </>
-                )}
-            </div> */}
+
             {isAuthenticated && (
                 <div className="flex items-center space-x-4 lg:ml-auto list-none">
                     <li className="text-amber-50 font-bold text-xs sm:text-base">Email: {auth.currentUser?.email}</li>
