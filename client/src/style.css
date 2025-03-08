@@ -15,6 +15,7 @@ html {}
 
 body {
   transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: 'Poppins', sans-serif;
   /* background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%); */
   /* min-height: 100vh; */
 }
