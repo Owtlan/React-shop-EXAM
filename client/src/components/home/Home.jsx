@@ -39,7 +39,7 @@ export default function Home() {
     }
 
     return (
-        <div className="flex min-h-screen sm:pt-10 lg:pt-0">
+        <div className="flex min-h-screen sm:pt-10 lg:pt-0 animate__animated animate__fadeIn">
             {/* Sidebar */}
             <div className="pt-15 sm:pt-10 w-2/6 lg:w-1/6 md:w-1/4 sm:w-1/4 p-4 bg-gray-100 min-h-screen">
                 <div className="max-w-xs mx-auto">
@@ -53,7 +53,7 @@ export default function Home() {
 
                     {/* тук е проблема не ми филтрира правилно */}
                     <h4 className="font-semibold mt-4 mb-2">Рейтинг</h4>
-                    {[[1, 3], [4, 6], [7, 10]].map(([min, max]) => (
+                    {[[1, 3], [4, 6], [7, 10], [11, 15], [16, 20]].map(([min, max]) => (
                         <button
                             key={`${min}-${max}`}
                             className={`w-full py-2 mb-2 rounded ${ratingFilter?.[0] === min ? "bg-green-500 text-white" : "bg-gray-200 text-black"}`}
