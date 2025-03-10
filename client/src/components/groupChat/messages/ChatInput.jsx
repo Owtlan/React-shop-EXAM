@@ -14,7 +14,7 @@ export default function ChatInput({ userId }) {
 
         return () => unsubscribeAuth();
     }, []);
-
+ 
     const sendMessage = async (e) => {
         e.preventDefault();
         if (!message.trim() || !currentUser) return;
