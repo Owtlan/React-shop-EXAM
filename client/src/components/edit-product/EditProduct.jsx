@@ -4,9 +4,6 @@ import { db } from "../../firebase-config";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-
-
-
 export default function EditProduct() {
 
     const { id } = useParams();
@@ -21,20 +18,17 @@ export default function EditProduct() {
     const [description, setDescription] = useState("");
     const [category, setCategory] = useState("");
 
-
     const auth = getAuth();
     const currentUser = auth.currentUser
-    console.log(currentUser);
 
     useEffect(() => {
         const fetchProduct = async () => {
 
             if (!currentUser) return;
-
             setLoading(true)
 
             try {
-                // da pitam bota za tova
+              
                 const docRef = doc(db, "products", id)
                 const docSnap = await getDoc(docRef)
 
@@ -74,7 +68,6 @@ export default function EditProduct() {
         }
 
         try {
-
             const productRef = doc(db, "products", id);
             await updateDoc(productRef, {
                 name,
@@ -156,6 +149,4 @@ export default function EditProduct() {
             </div>
         </div>
     )
-
-
 }
