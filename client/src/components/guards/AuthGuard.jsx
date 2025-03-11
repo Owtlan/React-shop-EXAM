@@ -7,18 +7,23 @@ import { auth } from "../../firebase-config";
 export default function AuthGuard({ children }) {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-
+    const [error, setError] = useState(null)
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
             setLoading(false);
-        });
+        },
+            (error) => {
+                console.error("Грешка при проверката на автентикацията:", error)
+                setError("Неуспешно зареждане на потребителя.")
+                setLoading(false)
+            });
 
         return () => unsubscribe();
     }, [])
 
-    if (loading)
+    if (loading) {
         return (
 
             <div className="flex items-center justify-center h-screen">
@@ -30,9 +35,15 @@ export default function AuthGuard({ children }) {
                     ></div>
                 </div>
             </div>
-
         )
-
+    }
+    if (error) {
+        return (
+            <div className="flex items-center justify-center h-screen">
+                <p className="text-lg text-red-500">{error}</p>
+            </div>
+        );
+    }
 
 
     return user ? children : <Navigate to="/login" />;
