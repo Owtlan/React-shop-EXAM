@@ -78,7 +78,7 @@ export default function Catalog({ category, showLiked, ratingFilter }) {
     }
 
     return (
-        <div className="container mx-auto pt-15 lg:p-8">
+        <div className="container mx-auto pt-15 lg:p-8 animate__animated animate__fadeIn">
             <h2 className="text-3xl font-semibold text-center mb-6 text-sky-800 animate__animated animate__bounce">Каталог</h2>
 
 
@@ -86,7 +86,7 @@ export default function Catalog({ category, showLiked, ratingFilter }) {
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6">
                 {currentProducts.map((product) => (
                     <div key={product.id} className="bg-white p-4 shadow-lg rounded-lg
-                  text-sm sm:sm:text-lg
+                  text-sm sm:sm:text-lg relative
                      ">
                         <img src={product.imageUrl} alt={product.name} className="w-full h-40 object-contain rounded" />
                         <h3 className="font-semibold mt-3">{product.name}</h3>
@@ -118,23 +118,23 @@ export default function Catalog({ category, showLiked, ratingFilter }) {
 
                         {currentUser && product.userId !== currentUser?.uid && (
                             <>
-                                <div className="">
-                                    <LikeButton productId={product.id} likedBy={product.likedBy || []} />
+
+                                <LikeButton productId={product.id} likedBy={product.likedBy || []} />
 
 
 
 
-                                    <button
-                                        onClick={() => addToCart(product)}
-                                        className="relative inline-flex items-center justify-center px-8 py-3 text-lg font-semibold text-white transition-all duration-300 ease-in-out transform bg-gradient-to-r from-green-400 to-green-600 rounded-full shadow-lg group hover:scale-105 hover:rotate-3 hover:shadow-2xl"
-                                    >
-                                        <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-green-500 to-green-700 opacity-20 group-hover:opacity-0 transition-all duration-300 rounded-full"></span>
-                                        <span className="absolute inset-0 w-full h-full border-2 border-green-500 rounded-full group-hover:border-transparent transition-all duration-300"></span>
-                                        <span className="relative z-10">Купи сега</span>
-                                    </button>
+                                <button
+                                    onClick={() => addToCart(product)}
+                                    className="relative inline-flex items-center justify-center px-8 py-3 text-lg font-semibold text-white transition-all duration-300 ease-in-out transform bg-gradient-to-r from-green-400 to-green-600 rounded-full shadow-lg group hover:scale-105 hover:rotate-3 hover:shadow-2xl"
+                                >
+                                    <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-green-500 to-green-700 opacity-20 group-hover:opacity-0 transition-all duration-300 rounded-full"></span>
+                                    <span className="absolute inset-0 w-full h-full border-2 border-green-500 rounded-full group-hover:border-transparent transition-all duration-300"></span>
+                                    <span className="relative z-10">Купи сега</span>
+                                </button>
 
 
-                                </div>
+
                             </>
                         )}
                     </div>
