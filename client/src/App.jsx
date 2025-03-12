@@ -24,20 +24,19 @@ function App() {
       <Router>
         <div className="flex flex-col min-h-screen">
           <Navbar />
-          {/* Това избутва футъра надолу */}
 
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<GuestGuard><Register /></GuestGuard>} />
             <Route path='/login' element={<GuestGuard><Login /></GuestGuard>} />
             <Route path='/logout' element={<Logout />} />
-            <Route path='/create' element={<CreateProduct />} />
+            <Route path='/create' element={<AuthGuard><CreateProduct /></AuthGuard>} />
             <Route path='catalog' element={<Catalog />} />
             <Route path='/details/:id' element={<Details />} />
-            <Route path='/edit/:id' element={<EditProduct />} />
-            <Route path="/users" element={<UsersPage />} /> {/* Страница с потребители */}
-            <Route path="/checkout" element={<AuthGuard> <Checkout /></AuthGuard>} />
-            <Route path='/chat/:userId' element={<Chat />} />
+            <Route path='/edit/:id' element={<AuthGuard><EditProduct /></AuthGuard>} />
+            <Route path="/users" element={<AuthGuard><UsersPage /></AuthGuard>} />
+            <Route path="/checkout" element={<AuthGuard><Checkout /></AuthGuard>} />
+            <Route path='/chat/:userId' element={<AuthGuard><Chat /></AuthGuard>} />
           </Routes>
 
           <Footer />
