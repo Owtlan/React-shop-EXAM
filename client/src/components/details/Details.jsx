@@ -4,11 +4,10 @@ import { useParams } from "react-router-dom"
 import { db } from "../../firebase-config";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-
+import '../css/colorFilters.module.css';
 import { useNavigate } from "react-router-dom";
 import LikeButton from "../like/LikeButton";
 import { useCart } from "../../context/CartContext";
-
 
 export default function Details() {
 
@@ -16,7 +15,9 @@ export default function Details() {
     const [product, setProduct] = useState(null)
     const [loading, setLoading] = useState(true)
     const [currentUser, setCurrentUser] = useState(null);
-    const auth = getAuth();
+
+    const [selectImage, setSelectedImage] = useState(null)
+    console.log(selectImage);
 
     const navigate = useNavigate()
     const { addToCart } = useCart()
@@ -25,17 +26,25 @@ export default function Details() {
     const isOwner = currentUser && product?.userId === currentUser.uid
 
 
-
     useEffect(() => {
-        const unsubscribeAuth = onAuthStateChanged(getAuth(), (user) => {
-            setCurrentUser(user);
-        });
-
-        // Зареждаме продукта
         const docRef = doc(db, "products", id);
         const unsubscribeProduct = onSnapshot(docRef, (docSnap) => {
+
             if (docSnap.exists()) {
-                setProduct({ id: docSnap.id, ...docSnap.data() });
+                const productData = { id: docSnap.id, ...docSnap.data() };
+                console.log(productData);
+
+                setProduct(productData);
+
+                // Първоначално задаваме главното изображение
+                if (productData.imageUrl) {
+                    setSelectedImage(productData.imageUrl);
+                }
+
+                // Ако има изображения за цветове, избери първото от тях
+                if (productData.colorImages && productData.colorImages.length > 0) {
+                    setSelectedImage(productData.colorImages[0].url);
+                }
             } else {
                 console.error("Продуктът не съществува!");
                 setProduct(null);
@@ -44,10 +53,19 @@ export default function Details() {
         });
 
         return () => {
-            unsubscribeAuth();
             unsubscribeProduct();
         };
-    }, [id])
+    }, [id]);
+
+    const handleImageChange = (color) => {
+        // Променяме избраната снимка за цвят, без да сменяме главното изображение
+        const selected = product.colorImages.find((img) => img.color === color);
+        if (selected) {
+            setSelectedImage(selected.url);
+        }
+    };
+
+
 
     if (loading) {
         return (
@@ -84,10 +102,27 @@ export default function Details() {
     return (
         <>
             <div className="container mx-auto p-8 flex flex-col items-center mt-3 max-w-xl">
-                <img src={product.imageUrl} alt={product.name} className="w-full h-64 object-contain rounded" />
+                <img src={selectImage} alt={product.name} className="w-full h-64 object-contain rounded" />
                 <h2 className="text-2xl font-semibold mt-4">{product.name}</h2>
                 <p className="text-gray-600 mt-2">{product.description}</p>
                 <p className="text-lg front-bold text-blue-500 mt-2">{product.price} лв.</p>
+
+                <div className="color-filters">
+                    {product.images && product.images.length > 0 ? (
+                        product.images.map((img) => (
+                            <button
+                                key={img.color}
+                                onClick={() => handleImageChange(img.color)}
+                                style={{ backgroundColor: img.color.toLowerCase() }}
+                                className="color-filter-btn"
+                            >
+                                {img.color}
+                            </button>
+                        ))
+                    ) : (
+                        <p>Няма изображения за този продукт.</p>
+                    )}
+                </div>
 
 
                 {isOwner && (
@@ -154,14 +189,6 @@ export default function Details() {
                                 <path strokeWidth="4" stroke="white" d="M21 6V29"></path>
                             </svg>
                         </button>
-
-
-
-
-
-
-
-
                     </div>
                 )}
 
