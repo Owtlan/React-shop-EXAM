@@ -17,6 +17,7 @@ export default function Details() {
     const [currentUser, setCurrentUser] = useState(null);
 
     const [selectImage, setSelectedImage] = useState(null)
+    const [selectedColorImage, setSelectedColorImage] = useState(null);
     console.log(selectImage);
 
     const navigate = useNavigate()
@@ -29,22 +30,21 @@ export default function Details() {
     useEffect(() => {
         const docRef = doc(db, "products", id);
         const unsubscribeProduct = onSnapshot(docRef, (docSnap) => {
-
             if (docSnap.exists()) {
                 const productData = { id: docSnap.id, ...docSnap.data() };
-                console.log(productData);
-
                 setProduct(productData);
 
-                // Първоначално задаваме главното изображение
                 if (productData.imageUrl) {
-                    setSelectedImage(productData.imageUrl);
-                }
-
-                // Ако има изображения за цветове, избери първото от тях
-                if (productData.colorImages && productData.colorImages.length > 0) {
                     setSelectedImage(productData.colorImages[0].url);
                 }
+                console.log(productData.imageUrl);
+
+                if (productData.colorImages && productData.colorImages.length > 0) {
+                    setSelectedColorImage(productData.imageUrl); // Задайте първото изображение за цвят, ако има
+                }
+
+
+
             } else {
                 console.error("Продуктът не съществува!");
                 setProduct(null);
@@ -58,10 +58,9 @@ export default function Details() {
     }, [id]);
 
     const handleImageChange = (color) => {
-        // Променяме избраната снимка за цвят, без да сменяме главното изображение
         const selected = product.colorImages.find((img) => img.color === color);
         if (selected) {
-            setSelectedImage(selected.url);
+            setSelectedColorImage(selected.url); // Променяме само избраното изображение за цвят
         }
     };
 
@@ -102,21 +101,24 @@ export default function Details() {
     return (
         <>
             <div className="container mx-auto p-8 flex flex-col items-center mt-3 max-w-xl">
-                <img src={selectImage} alt={product.name} className="w-full h-64 object-contain rounded" />
+                <img src={selectedColorImage || selectImage} alt={product.name} className="w-full h-64 object-contain rounded" /> {/* Използвай selectedColorImage */}
                 <h2 className="text-2xl font-semibold mt-4">{product.name}</h2>
                 <p className="text-gray-600 mt-2">{product.description}</p>
                 <p className="text-lg front-bold text-blue-500 mt-2">{product.price} лв.</p>
 
-                <div className="color-filters">
-                    {product.images && product.images.length > 0 ? (
-                        product.images.map((img) => (
+                <div className="mt-4 flex gap-2">
+                    {product.colorImages && product.colorImages.length > 0 ? (
+                        product.colorImages.map((item) => (
                             <button
-                                key={img.color}
-                                onClick={() => handleImageChange(img.color)}
-                                style={{ backgroundColor: img.color.toLowerCase() }}
-                                className="color-filter-btn"
+                                key={item.color}
+                                onClick={() => handleImageChange(item.color)}
+                                className="border p-2 rounded"
                             >
-                                {img.color}
+                                <img
+                                    src={item.url}
+                                    alt={item.color}
+                                    className="w-12 h-12 object-cover rounded"
+                                />
                             </button>
                         ))
                     ) : (
