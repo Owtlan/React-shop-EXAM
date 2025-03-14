@@ -17,6 +17,7 @@ export default function Details() {
     const [selectedColorImage, setSelectedColorImage] = useState(null);
 
 
+
     const navigate = useNavigate();
     const { addToCart } = useCart();
 
@@ -62,9 +63,16 @@ export default function Details() {
 
     const handleImageChange = (color) => {
         const selected = product.colorImages.find((img) => img.color === color);
+        console.log(selected);
+
         if (selected) {
             setSelectedColorImage(selected.url); // Променяме само избраното изображение за цвят
+            setProduct(prevProduct => ({
+                ...prevProduct,
+                name: `${prevProduct.name.split(' - ')[0]} - ${color}`
+            }))
         }
+
     };
 
     const handleDelete = async () => {
