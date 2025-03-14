@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { db } from "../../firebase-config";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import '../css/colorFilters.module.css';
+import styles from '../css/colorFilters.module.css'
 import { useNavigate } from "react-router-dom";
 import LikeButton from "../like/LikeButton";
 import { useCart } from "../../context/CartContext";
@@ -15,7 +15,7 @@ export default function Details() {
     const [currentUser, setCurrentUser] = useState(null);
     const [selectImage, setSelectedImage] = useState(null);
     const [selectedColorImage, setSelectedColorImage] = useState(null);
-  
+
 
     const navigate = useNavigate();
     const { addToCart } = useCart();
@@ -56,7 +56,7 @@ export default function Details() {
 
         return () => {
             unsubscribeProduct();
-            unsubscribeAuth(); 
+            unsubscribeAuth();
         };
     }, [id]);
 
@@ -107,7 +107,7 @@ export default function Details() {
                             <button
                                 key={item.color}
                                 onClick={() => handleImageChange(item.color)}
-                                className="border p-2 rounded"
+                                className={`${styles["color-filter-btn"]} ${item.color === selectedColorImage ? "bg-gray-500" : ""}`} // Приложи класовете от CSS модула
                             >
                                 <img
                                     src={item.url}
