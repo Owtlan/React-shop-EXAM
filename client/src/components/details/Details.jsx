@@ -15,7 +15,7 @@ export default function Details() {
     const [currentUser, setCurrentUser] = useState(null);
     const [selectImage, setSelectedImage] = useState(null);
     const [selectedColorImage, setSelectedColorImage] = useState(null);
-    console.log(selectImage);
+  
 
     const navigate = useNavigate();
     const { addToCart } = useCart();
