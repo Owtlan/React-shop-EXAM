@@ -13,6 +13,7 @@
     cursor: pointer;
     font-weight: bold;
     border-radius: 5px;
+    border: 1px solid black;
 }
 
 .color-filter-btn:hover {
