@@ -3,29 +3,25 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { db } from "../../firebase-config";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-
 import '../css/colorFilters.module.css';
 import { useNavigate } from "react-router-dom";
 import LikeButton from "../like/LikeButton";
 import { useCart } from "../../context/CartContext";
 
 export default function Details() {
-
-    const { id } = useParams()
-    const [product, setProduct] = useState(null)
-    const [loading, setLoading] = useState(true)
+    const { id } = useParams();
+    const [product, setProduct] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [currentUser, setCurrentUser] = useState(null);
-
-    const [selectImage, setSelectedImage] = useState(null)
+    const [selectImage, setSelectedImage] = useState(null);
     const [selectedColorImage, setSelectedColorImage] = useState(null);
     console.log(selectImage);
 
-    const navigate = useNavigate()
-    const { addToCart } = useCart()
+    const navigate = useNavigate();
+    const { addToCart } = useCart();
 
-
-    const isOwner = currentUser && product?.userId === currentUser.uid
-
+    // Проверката дали текущия потребител е собственик на продукта
+    const isOwner = currentUser && product?.userId === currentUser.uid;
 
     useEffect(() => {
         const docRef = doc(db, "products", id);
@@ -42,9 +38,6 @@ export default function Details() {
                 if (productData.colorImages && productData.colorImages.length > 0) {
                     setSelectedColorImage(productData.imageUrl); // Задайте първото изображение за цвят, ако има
                 }
-
-
-
             } else {
                 console.error("Продуктът не съществува!");
                 setProduct(null);
@@ -52,8 +45,18 @@ export default function Details() {
             setLoading(false);
         });
 
+        // Следене на текущия потребител
+        const unsubscribeAuth = onAuthStateChanged(getAuth(), (user) => {
+            if (user) {
+                setCurrentUser(user); // Актуализиране на текущия потребител
+            } else {
+                setCurrentUser(null); // Ако няма текущ потребител
+            }
+        });
+
         return () => {
             unsubscribeProduct();
+            unsubscribeAuth(); // Прекратяваме наблюдението на потребителя
         };
     }, [id]);
 
@@ -64,44 +67,36 @@ export default function Details() {
         }
     };
 
-
+    const handleDelete = async () => {
+        if (window.confirm("Сигурен ли си, че искаш да изтриеш този продукт?")) {
+            try {
+                await deleteDoc(doc(db, "products", product.id));
+                alert("Продуктът беше изтрит успешно!");
+                navigate("/catalog");
+            } catch (error) {
+                console.error("Грешка при изтриването на продукта:", error);
+            }
+        }
+    };
 
     if (loading) {
         return (
             <div className="flex items-center justify-center h-screen">
-                <div
-                    className="w-20 h-20 border-4 border-transparent text-blue-400 text-4xl animate-spin flex items-center justify-center border-t-blue-400 rounded-full"
-                >
-                    <div
-                        className="w-16 h-16 border-4 border-transparent text-red-400 text-2xl animate-spin flex items-center justify-center border-t-red-400 rounded-full"
-                    ></div>
+                <div className="w-20 h-20 border-4 border-transparent text-blue-400 text-4xl animate-spin flex items-center justify-center border-t-blue-400 rounded-full">
+                    <div className="w-16 h-16 border-4 border-transparent text-red-400 text-2xl animate-spin flex items-center justify-center border-t-red-400 rounded-full"></div>
                 </div>
             </div>
-        )
+        );
     }
 
     if (!product) {
         return <p className="text-center text-lg mt-10">Продуктът не беше намерен.</p>;
-
     }
-    const handleDelete = async () => {
-        if (window.confirm("Сигурен ли си, че искаш да изтриеш този продукт?")) {
-            try {
-                await deleteDoc(doc(db, "products", product.id))
-                alert("Продуктът беше изтрит успешно!");
-                navigate("/catalog");
-            } catch (error) {
-
-            }
-        }
-    }
-
-
 
     return (
         <>
             <div className="container mx-auto p-8 flex flex-col items-center mt-3 max-w-xl">
-                <img src={selectedColorImage || selectImage} alt={product.name} className="w-full h-64 object-contain rounded" /> {/* Използвай selectedColorImage */}
+                <img src={selectedColorImage || selectImage} alt={product.name} className="w-full h-64 object-contain rounded" />
                 <h2 className="text-2xl font-semibold mt-4">{product.name}</h2>
                 <p className="text-gray-600 mt-2">{product.description}</p>
                 <p className="text-lg front-bold text-blue-500 mt-2">{product.price} лв.</p>
@@ -126,19 +121,12 @@ export default function Details() {
                     )}
                 </div>
 
-
+                {/* Показваме бутоните за редактиране и изтриване само ако потребителят е собственик */}
                 {isOwner && (
                     <div className="flex gap-4 mt-4">
                         <button onClick={() => navigate(`/edit/${product.id}`)} className="bg-yellow-500 text-white p-2 rounded">
                             Редактирай
                         </button>
-
-                        {/* <button onClick={handleDelete} className="bg-red-500 text-white p-2 rounded">
-                            🗑️ Изтрий
-
-
-                        </button> */}
-
 
                         <button
                             onClick={handleDelete}
@@ -200,16 +188,12 @@ export default function Details() {
                         <button
                             onClick={() => addToCart(product)}
                             className="mt-2 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
-
                         >
                             Купи
                         </button>
                     </>
                 )}
-
-
             </div>
         </>
-    )
-
+    );
 }
