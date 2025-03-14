@@ -16,6 +16,7 @@ export default function Details() {
     const [selectImage, setSelectedImage] = useState(null);
     const [selectedColorImage, setSelectedColorImage] = useState(null);
 
+console.log(product);
 
 
     const navigate = useNavigate();
@@ -68,6 +69,7 @@ export default function Details() {
         if (selected) {
             setSelectedColorImage(selected.url); // Променяме само избраното изображение за цвят
             setProduct(prevProduct => ({
+                
                 ...prevProduct,
                 name: `${prevProduct.name.split(' - ')[0]} - ${color}`
             }))
