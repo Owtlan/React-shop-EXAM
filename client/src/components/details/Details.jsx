@@ -56,7 +56,7 @@ export default function Details() {
 
         return () => {
             unsubscribeProduct();
-            unsubscribeAuth(); // Прекратяваме наблюдението на потребителя
+            unsubscribeAuth(); 
         };
     }, [id]);
 
