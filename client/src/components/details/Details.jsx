@@ -16,7 +16,7 @@ export default function Details() {
     const [selectImage, setSelectedImage] = useState(null);
     const [selectedColorImage, setSelectedColorImage] = useState(null);
 
-console.log(product);
+
 
 
     const navigate = useNavigate();
@@ -35,7 +35,6 @@ console.log(product);
                 if (productData.imageUrl) {
                     setSelectedImage(productData.colorImages[0].url);
                 }
-                console.log(productData.imageUrl);
 
                 if (productData.colorImages && productData.colorImages.length > 0) {
                     setSelectedColorImage(productData.imageUrl); // Задайте първото изображение за цвят, ако има
