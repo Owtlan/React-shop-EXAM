@@ -37,7 +37,7 @@ export default function Details() {
                 }
 
                 if (productData.colorImages && productData.colorImages.length > 0) {
-                    setSelectedColorImages(productData.imageUrl); // Задайте първото изображение за цвят, ако има
+                    setSelectedColorImage(productData.imageUrl); // Задайте първото изображение за цвят, ако има
                 }
             } else {
                 console.error("Продуктът не съществува!");
