@@ -7,7 +7,7 @@ import { useCart } from "../../context/CartContext";
 import { onAuthStateChanged } from "firebase/auth";
 import 'animate.css'
 
-export default function Catalog({ category, showLiked, ratingFilter }) {
+export default function Catalog({ category, showLiked, ratingFilter,searchQuery }) {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const { addToCart } = useCart();
@@ -46,8 +46,12 @@ export default function Catalog({ category, showLiked, ratingFilter }) {
             if (!ratingFilter) return true;
             return (product.likedBy?.length || 0) >= ratingFilter[0] &&
                 (product.likedBy?.length || 0) <= ratingFilter[1];
+        })
+        .filter(product => {
+            if (!product.name) return false;  // Skip products without a name
+            return product.name.toLowerCase().includes(searchQuery?.toLowerCase() || "");
         });
-
+    console.log("Filtered products in catalog:", filteredProducts);
 
     const indexOfLastProduct = currentPage * productsPerPage
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
