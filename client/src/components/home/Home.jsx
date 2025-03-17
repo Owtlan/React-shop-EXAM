@@ -11,10 +11,10 @@ export default function Home() {
     const [showLiked, setShowLiked] = useState(false);
     const [ratingFilter, setRatingFilter] = useState(null);
 
-    const [users, setUsers] = useState([]);
+    const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [searchQuery, setSearchQuery] = useState('')
-
+    const [users, setUsers] = useState([])
     // console.log("Rating filter:", ratingFilter);
 
     const [filteredProducts, setFilteredProducts] = useState([])
@@ -24,29 +24,64 @@ export default function Home() {
     // useEffect(() => {
     //     const fetchUsers = async () => {
     //         setLoading(true);
-    //         const usersCollection = await getDocs(collection(db, "users"));
-    //         const userList = usersCollection.docs.map(doc => ({
+    //         const usersCollection = await getDocs(collection(db, 'users'));
+    //         const userList = usersCollection.docs.map((doc) => ({
     //             uid: doc.id,
-    //             email: doc.data().email
+    //             email: doc.data().email,
     //         }));
+
     //         setUsers(userList);
     //         setLoading(false);
-    //         // console.log("Loaded users:", userList);
     //     };
+
     //     fetchUsers();
     // }, []);
 
 
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            setLoading(true);
+            try {
+                const productsCollection = await getDocs(collection(db, "products"));
+                const productList = productsCollection.docs.map(doc => ({
+                    id: doc.id,
+                    name: doc.data().name,
+                    description: doc.data().description,
+                    price: doc.data().price
+                }));
+                console.log("Loaded products from Firebase:", productList);
+                setProducts(productList);  // Обновяваме state с продуктите
+            } catch (error) {
+                console.error("Грешка при зареждане на продуктите:", error);
+            } finally {
+                setLoading(false);  // Винаги спрете loader след края на операцията
+            }
+        };
+
+        fetchProducts();
+    }, []);  // Добавяне на [] за да се извика само веднъж при стартиране на компонента
+
+
+
+
     useEffect(() => {
         if (searchQuery) {
+            console.log("Filtering products with search query:", searchQuery);
             const filtered = products.filter((product) =>
                 product.name.toLowerCase().includes(searchQuery.toLowerCase())
             );
+            console.log("Filtered products:", filtered);
             setFilteredProducts(filtered)
         } else {
             setFilteredProducts(products)
         }
     }, [searchQuery, products])
+
+
+
+
+
 
     const handleSearch = (query) => {
         setSearchQuery(query);
@@ -175,7 +210,7 @@ export default function Home() {
             </div>
 
             <div className="flex-1 p-4 max-w-screen-lg mx-auto">
-                <Catalog category={category} showLiked={showLiked} ratingFilter={ratingFilter} users={filteredUsers} />
+                <Catalog category={category} showLiked={showLiked} ratingFilter={ratingFilter} products={filteredProducts} />
             </div>
         </div>
     );
