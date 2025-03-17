@@ -21,21 +21,21 @@ export default function Home() {
 
 
 
-    // useEffect(() => {
-    //     const fetchUsers = async () => {
-    //         setLoading(true);
-    //         const usersCollection = await getDocs(collection(db, 'users'));
-    //         const userList = usersCollection.docs.map((doc) => ({
-    //             uid: doc.id,
-    //             email: doc.data().email,
-    //         }));
+    useEffect(() => {
+        const fetchUsers = async () => {
+            setLoading(true);
+            const usersCollection = await getDocs(collection(db, 'users'));
+            const userList = usersCollection.docs.map((doc) => ({
+                uid: doc.id,
+                email: doc.data().email,
+            }));
 
-    //         setUsers(userList);
-    //         setLoading(false);
-    //     };
+            setUsers(userList);
+            setLoading(false);
+        };
 
-    //     fetchUsers();
-    // }, []);
+        fetchUsers();
+    }, []);
 
 
 
@@ -77,11 +77,6 @@ export default function Home() {
             setFilteredProducts(products)
         }
     }, [searchQuery, products])
-
-
-
-
-
 
     const handleSearch = (query) => {
         setSearchQuery(query);
@@ -210,7 +205,7 @@ export default function Home() {
             </div>
 
             <div className="flex-1 p-4 max-w-screen-lg mx-auto">
-                <Catalog category={category} showLiked={showLiked} ratingFilter={ratingFilter} products={filteredProducts} />
+                <Catalog category={category} showLiked={showLiked} ratingFilter={ratingFilter} products={filteredProducts} searchQuery={searchQuery} />
             </div>
         </div>
     );
