@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";  // За навигация към чата
 import Catalog from "../catalog/Catalog";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query } from "firebase/firestore";
 import { db, auth } from "../../firebase-config";
+import Search from "../search/Search";
+
 
 export default function Home() {
     const [category, setCategory] = useState('');
@@ -11,22 +13,45 @@ export default function Home() {
 
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('')
+
     // console.log("Rating filter:", ratingFilter);
 
+    const [filteredProducts, setFilteredProducts] = useState([])
+
+
+
+    // useEffect(() => {
+    //     const fetchUsers = async () => {
+    //         setLoading(true);
+    //         const usersCollection = await getDocs(collection(db, "users"));
+    //         const userList = usersCollection.docs.map(doc => ({
+    //             uid: doc.id,
+    //             email: doc.data().email
+    //         }));
+    //         setUsers(userList);
+    //         setLoading(false);
+    //         // console.log("Loaded users:", userList);
+    //     };
+    //     fetchUsers();
+    // }, []);
+
+
     useEffect(() => {
-        const fetchUsers = async () => {
-            setLoading(true);
-            const usersCollection = await getDocs(collection(db, "users"));
-            const userList = usersCollection.docs.map(doc => ({
-                uid: doc.id,
-                email: doc.data().email
-            }));
-            setUsers(userList);
-            setLoading(false);
-            // console.log("Loaded users:", userList);
-        };
-        fetchUsers();
-    }, []);
+        if (searchQuery) {
+            const filtered = products.filter((product) =>
+                product.name.toLowerCase().includes(searchQuery.toLowerCase())
+            );
+            setFilteredProducts(filtered)
+        } else {
+            setFilteredProducts(products)
+        }
+    }, [searchQuery, products])
+
+    const handleSearch = (query) => {
+        setSearchQuery(query);
+    };
+
 
     if (loading) {
         return (
@@ -43,6 +68,9 @@ export default function Home() {
             {/* Sidebar */}
             <div className="pt-15 sm:pt-10 w-2/6 lg:w-1/6 md:w-1/4 sm:w-1/4 p-4 bg-gray-100 min-h-screen">
                 <div className="max-w-xs mx-auto">
+
+                    <Search onSearch={handleSearch} />
+
                     <h3 className="sm:text-xl text-base font-bold mb-4">Филтриране</h3>
                     {/* <button
                         className={`w-full py-2 mb-2 rounded ${showLiked ? "bg-blue-500 text-white" : "bg-gray-200 text-black"}`}
@@ -72,27 +100,6 @@ export default function Home() {
                             ></path>
                         </svg>
                     </button>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                     {/* тук е проблема не ми филтрира правилно */}
@@ -168,7 +175,7 @@ export default function Home() {
             </div>
 
             <div className="flex-1 p-4 max-w-screen-lg mx-auto">
-                <Catalog category={category} showLiked={showLiked} ratingFilter={ratingFilter} />
+                <Catalog category={category} showLiked={showLiked} ratingFilter={ratingFilter} users={filteredUsers} />
             </div>
         </div>
     );
