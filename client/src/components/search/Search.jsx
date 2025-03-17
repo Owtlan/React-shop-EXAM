@@ -9,12 +9,17 @@ export default function Search({ onSearch }) {
 
 
     const handleChange = (e) => {
+        console.log(e.target.value);
+
         setSearchQuery(e.target.value)
     }
 
     const handleSearch = () => {
-        onSearch(searchQuery);
-    }
+        console.log("Searching for:", searchQuery);
+        if (searchQuery.trim() !== "") {
+            onSearch(searchQuery);
+        }
+    };
 
 
 
