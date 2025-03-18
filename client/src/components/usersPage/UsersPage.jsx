@@ -9,7 +9,6 @@ export default function UsersPage() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // 🔥 Следим в реално време промените в users
         const unsubscribe = onSnapshot(collection(db, "users"), (snapshot) => {
             const userList = snapshot.docs.map(doc => ({
                 uid: doc.id,
@@ -30,12 +29,10 @@ export default function UsersPage() {
                 const docSnap = await getDoc(userRef);
 
                 if (docSnap.exists()) {
-                    // 🔥 Маркираме потребителя като онлайн
                     const isCurrentlyOnline = docSnap.data().isOnline;
 
-                    if (!isCurrentlyOnline) { // 🔥 Само ако не е онлайн
+                    if (!isCurrentlyOnline) { 
                         await updateDoc(userRef, { isOnline: true });
-                        console.log("🔵 Потребителят е отбелязан като онлайн.");
                     }
                 } else {
                     console.warn("Документът за този потребител не съществува!");
@@ -60,7 +57,6 @@ export default function UsersPage() {
         return () => unsubscribe();
     }, []);
 
-    // 🔥 Разделяме на онлайн и офлайн потребители
     const onlineUsers = users.filter(user => user.isOnline);
     const offlineUsers = users.filter(user => !user.isOnline);
 
@@ -83,7 +79,7 @@ export default function UsersPage() {
             <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">📜 Списък с потребители</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* 🟢 Онлайн потребители */}
+    
                 <div>
                     <h3 className="text-xl font-semibold text-green-600 mb-4">🟢 Онлайн</h3>
                     <ul className="space-y-4">
@@ -101,7 +97,6 @@ export default function UsersPage() {
                     </ul>
                 </div>
 
-                {/* ⚪ Офлайн потребители */}
                 <div>
                     <h3 className="text-xl font-semibold text-gray-500 mb-4">⚪ Офлайн</h3>
                     <ul className="space-y-4">

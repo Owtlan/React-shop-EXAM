@@ -33,7 +33,7 @@ export default function CreateProduct() {
                 'https://api.cloudinary.com/v1_1/de4beegii/image/upload',
                 formData
             );
-            return response.data.secure_url;  // връща URL на каченото изображение
+            return response.data.secure_url; 
         } catch (err) {
             setError("Грешка при качването на снимката");
             console.error(err);
@@ -47,10 +47,10 @@ export default function CreateProduct() {
         }
 
         try {
-            const colorImageUrl = await uploadImage(colorImage); // Качване на изображението за цвят
-            setColorImages([...colorImages, { color, url: colorImageUrl }]); // Добавяне към масива за цветови изображения
-            setColor(''); // Изчистване на полето за цвят
-            setColorImage(null); // Изчистване на избора за цветово изображение
+            const colorImageUrl = await uploadImage(colorImage); 
+            setColorImages([...colorImages, { color, url: colorImageUrl }]); 
+            setColor(''); 
+            setColorImage(null); 
         } catch (err) {
             setError("Грешка при качването на изображението за цвета");
             console.error(err);
@@ -61,7 +61,7 @@ export default function CreateProduct() {
         setImage(selectedImage);
         if (!imageUrl) {
             const url = await uploadImage(selectedImage);
-            setImageUrl(url); // Главното изображение
+            setImageUrl(url); 
         }
     };
 
@@ -86,14 +86,13 @@ export default function CreateProduct() {
                 name,
                 price: Number(price),
                 description,
-                imageUrl, // Главно изображение
+                imageUrl, 
                 category,
-                colorImages, // Масив със снимки за цвят
+                colorImages, 
                 createdAt: new Date(),
                 userId: user.uid,
             });
 
-            console.log("Продуктът е добавен успешно!");
             navigate("/catalog");
         } catch (error) {
             console.error("Грешка при добавяне на продукт:", error.message);
@@ -143,7 +142,6 @@ export default function CreateProduct() {
                             />
                         </div>
 
-                        {/* Главно изображение */}
                         <div className="mt-3">
                             <label className="block mb-1">Изображение</label>
                             <input
@@ -166,7 +164,6 @@ export default function CreateProduct() {
                             )}
                         </div>
 
-                        {/* Категория */}
                         <div className="mt-3">
                             <label className="block mb-1">Изберете категория</label>
                             <select
@@ -187,7 +184,6 @@ export default function CreateProduct() {
                             </select>
                         </div>
 
-                        {/* Добавяне на цветови изображения */}
                         <div className="mt-3">
                             <label className="block mb-1">Цвят и изображение</label>
                             <input
@@ -211,7 +207,6 @@ export default function CreateProduct() {
                             </button>
                         </div>
 
-                        {/* Избрани цветови изображения */}
                         <div className="mt-3">
                             <h3>Добавени цветове и изображения:</h3>
                             <ul>

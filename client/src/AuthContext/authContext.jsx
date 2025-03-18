@@ -1,7 +1,6 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { useState, useEffect, createContext } from "react"
 
-
 const AuthContext = createContext()
 
 
@@ -10,15 +9,14 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const auth = getAuth();
 
-
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setIsAuthenticated(true);
-                setUser(user); // Записваме текущия потребител
+                setUser(user);
             } else {
                 setIsAuthenticated(false);
-                setUser(null); // Премахваме потребителя при logout
+                setUser(null);
             }
         });
 

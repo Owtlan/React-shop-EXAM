@@ -13,14 +13,11 @@ export default function Register() {
     const [error, setError] = useState("")
     const navigate = useNavigate()
 
-
     const isValidEmail = (email) => {
         return email.endsWith("@abv.bg") || email.endsWith("@gmail.com");
     };
 
-
     const isValidUsername = (username) => /^[a-zA-Z0-9]+$/.test(username);
-
     const isValidPassword = (password) => /^[a-zA-Z0-9]{6,}$/.test(password);
 
 
@@ -60,7 +57,6 @@ export default function Register() {
                 createdAt: new Date(),
                 isOnline: false,
             });
-            console.log("Потребителят е добавен в Firestore!");
             navigate('/')
 
         } catch (error) {
@@ -81,7 +77,6 @@ export default function Register() {
             }
         }
     }
-
 
     return (
         <>
@@ -115,7 +110,6 @@ export default function Register() {
                                 required
                             />
                         </div>
-
 
                         <div className="mt-3">
                             <label className="block mb-1">Парола</label>
@@ -153,6 +147,4 @@ export default function Register() {
             </div>
         </>
     )
-
-
 }

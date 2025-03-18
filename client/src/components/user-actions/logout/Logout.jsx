@@ -12,9 +12,7 @@ export default function Logout() {
 
         const userRef = doc(db, "users", auth.currentUser.uid)
 
-
         try {
-            // 🔹 Проверяваме дали документът съществува
             const userDoc = await getDoc(userRef);
 
             if (userDoc.exists()) {
@@ -24,7 +22,6 @@ export default function Logout() {
             }
 
             await signOut(auth);
-            console.log("✅ Успешно излизане!");
             navigate("/");
         } catch (error) {
             console.error("❌ Грешка при излизане: ", error.message);

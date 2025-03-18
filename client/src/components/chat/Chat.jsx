@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase-config";
 
-
 export default function Chat() {
     const { userId } = useParams();
     const [chatPartnerId, setChatPartnerId] = useState(null);
@@ -22,10 +21,8 @@ export default function Chat() {
                 return;
             }
 
-
             const userRef = doc(db, "users", userId);
             const userSnap = await getDoc(userRef);
-
 
             if (userSnap.exists()) {
                 setChatPartnerId(userSnap.data().uid)
@@ -38,12 +35,6 @@ export default function Chat() {
         fetchUsers();
     }, [userId]);
 
-
-
-
-
-
-    console.log("Chat with user:", userId);
 
     if (loading) return <div>
         <div className="flex-col gap-4 w-full flex items-center justify-center">

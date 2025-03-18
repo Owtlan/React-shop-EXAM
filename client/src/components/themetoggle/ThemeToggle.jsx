@@ -17,19 +17,16 @@ const ThemeToggle = () => {
 
     return (
         <label className="inline-flex items-center relative">
-            {/* Скрит input, който ще се използва за състоянието на превключвателя */}
             <input
                 className="peer hidden"
                 id="toggle"
                 type="checkbox"
-                checked={darkMode} // Свързване на състоянието на darkMode
-                onChange={() => setDarkMode(!darkMode)} // Промяна на darkMode при клик
+                checked={darkMode}
+                onChange={() => setDarkMode(!darkMode)} 
             />
-            {/* Превключвателят */}
             <div className="relative w-[110px] h-[50px] bg-yellow-50 peer-checked:bg-blue-200 rounded-full after:absolute after:content-[''] after:w-[40px] after:h-[40px] after:bg-gradient-to-r from-orange-500 to-yellow-400 peer-checked:after:from-zinc-900 peer-checked:after:to-zinc-900 after:rounded-full after:top-[5px] after:left-[5px] active:after:w-[50px] peer-checked:after:left-[105px] peer-checked:after:translate-x-[-100%] shadow-sm duration-300 after:duration-300 after:shadow-md">
             </div>
 
-            {/* Иконата за светла тема (☀️) */}
             <svg
                 height="0"
                 width="100"
@@ -44,7 +41,6 @@ const ThemeToggle = () => {
                 ></path>
             </svg>
 
-            {/* Иконата за тъмна тема (🌙) */}
             <svg
                 height="512"
                 width="512"

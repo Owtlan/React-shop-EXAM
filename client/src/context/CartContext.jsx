@@ -1,26 +1,19 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import AuthContext from "../AuthContext/authContext";
 
-// 1️⃣ Създаваме контекста
 const CartContext = createContext();
 
-// 2️⃣ Създаваме провайдър компонента
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
 
     const { user } = useContext(AuthContext)
-    const [idsArray, setIdsArray] = useState([])
-
 
     useEffect(() => {
         const savedCart = localStorage.getItem("cart");
 
-
         try {
-
             if (savedCart) {
                 const parsedCart = JSON.parse(savedCart);
-                // console.log(parsedCart);
 
                 if (user) {
                     console.log(parsedCart);
@@ -30,15 +23,13 @@ export const CartProvider = ({ children }) => {
                     setCart(filteredCart)
 
                 } else {
-                    setCart([]); // Ако няма потребител, изчистваме количката
+                    setCart([]);
                 }
             } else {
                 setCart([])
             }
         } catch (error) {
             console.error("Грешка при парсиране на cart от localStorage", error);
-            // console.log(localStorage);
-
             localStorage.removeItem("cart");
         }
 
@@ -52,14 +43,13 @@ export const CartProvider = ({ children }) => {
         }
     }, [cart, user]);
 
-    // Функция за добавяне на продукт в количката
-    // Функция за добавяне на продукт в количката
     const addToCart = (product) => {
         if (user) {
-            // Винаги добавяйте `userId` към продукта, за да е сигурно, че той ще бъде асоцииран с потребителя
             const productWithUserId = { ...product, userId: user.uid };
 
             setCart((prevCart) => {
+                console.log(prevCart);
+                
                 const existingProductIndex = prevCart.findIndex(item => item.id === productWithUserId.id);
 
                 if (existingProductIndex !== -1) {
@@ -67,6 +57,8 @@ export const CartProvider = ({ children }) => {
                     const updatedCart = [...prevCart];
                     updatedCart[existingProductIndex].quantity += 1;
                     updatedCart[existingProductIndex].totalPrice = updatedCart[existingProductIndex].quantity * productWithUserId.price;
+                    console.log(updatedCart);
+
                     return updatedCart;
                 } else {
                     // Ако продуктът не съществува в количката, добавяме го с quantity = 1 и изчисляваме totalPrice
@@ -83,7 +75,6 @@ export const CartProvider = ({ children }) => {
         }
     };
 
-    // Функция за премахване на продукт от количката
     const removeFromCart = (id) => {
         setCart((prevCart) => {
             const productIndex = prevCart.findIndex((item) => item.id === id);
@@ -115,7 +106,6 @@ export const CartProvider = ({ children }) => {
         });
     };
 
-
     const clearCart = () => {
         setCart([]);
         localStorage.removeItem("cart");
@@ -128,7 +118,6 @@ export const CartProvider = ({ children }) => {
     );
 };
 
-// 3️⃣ Функция за използване на контекста
 export const useCart = () => {
     return useContext(CartContext);
 };

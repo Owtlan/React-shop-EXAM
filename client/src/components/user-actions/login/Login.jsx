@@ -16,16 +16,13 @@ export default function Login() {
         e.preventDefault()
         setError("");
 
-
         if (!email || !password) {
             setError("Моля, попълнете всички полета.")
             return;
         }
 
-
         try {
             await signInWithEmailAndPassword(auth, email, password)
-            console.log("Успешно влизане!");
 
             navigate('/')
         } catch (error) {
@@ -48,13 +45,11 @@ export default function Login() {
                     setError("Неуспешно влизане. Опитайте отново.");
 
             }
-
         }
     };
 
     return (
         <>
-
             <div className="flex justify-center items-center min-h-screen">
                 <div className="bg-white p-8 rounded-lg shadow-lg w-96">
                     <h2 className="text-2xl font-semibold text-center">Вход</h2>

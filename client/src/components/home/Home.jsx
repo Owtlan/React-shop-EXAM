@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";  // За навигация към чата
 import Catalog from "../catalog/Catalog";
 import { collection, getDocs, query } from "firebase/firestore";
 import { db, auth } from "../../firebase-config";
@@ -14,31 +13,7 @@ export default function Home() {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [searchQuery, setSearchQuery] = useState('')
-    // const [users, setUsers] = useState([])
-    // console.log("Rating filter:", ratingFilter);
-
     const [filteredProducts, setFilteredProducts] = useState([])
-
-
-
-
-    // useEffect(() => {
-    //     const fetchUsers = async () => {
-    //         setLoading(true);
-    //         const usersCollection = await getDocs(collection(db, 'users'));
-    //         const userList = usersCollection.docs.map((doc) => ({
-    //             uid: doc.id,
-    //             email: doc.data().email,
-    //         }));
-
-    //         setUsers(userList);
-    //         setLoading(false);
-    //     };
-
-    //     fetchUsers();
-    // }, []);
-
-
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -51,39 +26,36 @@ export default function Home() {
                     description: doc.data().description,
                     price: doc.data().price
                 }));
-                console.log("Loaded products from Firebase:", productList);
-                setProducts(productList);  // Обновяваме state с продуктите
+               
+                setProducts(productList); 
                 setFilteredProducts(productList)
             } catch (error) {
                 console.error("Грешка при зареждане на продуктите:", error);
             } finally {
-                setLoading(false);  // Винаги спрете loader след края на операцията
+                setLoading(false);
             }
         };
 
         fetchProducts();
-    }, []);  // Добавяне на [] за да се извика само веднъж при стартиране на компонента
-
-
-
+    }, []);
 
     useEffect(() => {
         if (searchQuery) {
-            console.log("Filtering products with search query:", searchQuery);
             const filtered = products.filter((product) =>
                 product.name.toLowerCase().includes(searchQuery.toLowerCase())
             );
-            console.log("Filtered products:", filtered);
+
             setFilteredProducts(filtered)
         } else {
             setFilteredProducts(products)
         }
     }, [searchQuery, products])
 
+
+
     const handleSearch = (query) => {
         setSearchQuery(query);
     };
-
 
     const handleClear = () => {
         setSearchQuery('')
@@ -102,21 +74,12 @@ export default function Home() {
 
     return (
         <div className="flex min-h-screen sm:pt-10 lg:pt-0 animate__animated animate__fadeIn">
-            {/* Sidebar */}
             <div className="pt-15 sm:pt-10 w-2/6 lg:w-1/6 md:w-1/4 sm:w-1/4 p-4 bg-gray-100 min-h-screen">
                 <div className="max-w-xs mx-auto">
 
                     <Search onSearch={handleSearch} searchQuery={searchQuery} handleClear={handleClear} />
 
                     <h3 className="sm:text-xl text-base font-bold mb-4">Филтриране</h3>
-                    {/* <button
-                        className={`w-full py-2 mb-2 rounded ${showLiked ? "bg-blue-500 text-white" : "bg-gray-200 text-black"}`}
-                        onClick={() => setShowLiked(!showLiked)}
-                    >
-                        {showLiked ? "Показване на всички" : "❤️ Само харесаните"}
-                    </button> */}
-
-
 
                     <button
                         className="group flex w-fit cursor-pointer items-center gap-2 overflow-hidden border rounded-full border-pink-700 fill-none p-2 px-3 font-extrabold text-pink-500 transition-all active:scale-90 peer-checked:fill-pink-500 peer-checked:hover:text-white"
@@ -138,8 +101,6 @@ export default function Home() {
                         </svg>
                     </button>
 
-
-                    {/* тук е проблема не ми филтрира правилно */}
                     <h4 className="font-semibold mt-4 mb-2">Рейтинг</h4>
                     {[[1, 3], [4, 6], [7, 10], [11, 15], [16, 20]].map(([min, max]) => (
                         <button
@@ -151,7 +112,7 @@ export default function Home() {
                         </button>
                     ))}
                 </div>
-                {/* Филтриращи бутони за категории */}
+
                 <div className="flex flex-col w-full pt-6 mx-auto text-sm sm:text-xs md:text-sm lg:text-sm xl:text-base">
                     <button
                         className="bg-black text-white border border-gray-600 border-b-4 font-medium overflow-hidden relative px-4 py-2 rounded-md hover:brightness-150 hover:border-t-4 hover:border-b active:opacity-75 outline-none duration-300 group"

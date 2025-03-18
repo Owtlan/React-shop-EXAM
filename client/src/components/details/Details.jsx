@@ -17,12 +17,9 @@ export default function Details() {
     const [selectedColorImage, setSelectedColorImage] = useState(null);
 
 
-
-
     const navigate = useNavigate();
     const { addToCart } = useCart();
 
-    // Проверката дали текущия потребител е собственик на продукта
     const isOwner = currentUser && product?.userId === currentUser.uid;
 
     useEffect(() => {
@@ -37,7 +34,7 @@ export default function Details() {
                 }
 
                 if (productData.colorImages && productData.colorImages.length > 0) {
-                    setSelectedColorImage(productData.imageUrl); // Задайте първото изображение за цвят, ако има
+                    setSelectedColorImage(productData.imageUrl); 
                 }
             } else {
                 console.error("Продуктът не съществува!");
@@ -46,12 +43,12 @@ export default function Details() {
             setLoading(false);
         });
 
-        // Следене на текущия потребител
+
         const unsubscribeAuth = onAuthStateChanged(getAuth(), (user) => {
             if (user) {
-                setCurrentUser(user); // Актуализиране на текущия потребител
+                setCurrentUser(user);
             } else {
-                setCurrentUser(null); // Ако няма текущ потребител
+                setCurrentUser(null); 
             }
         });
 
@@ -63,10 +60,9 @@ export default function Details() {
 
     const handleImageChange = (color) => {
         const selected = product.colorImages.find((img) => img.color === color);
-        console.log(selected);
 
         if (selected) {
-            setSelectedColorImage(selected.url); // Променяме само избраното изображение за цвят
+            setSelectedColorImage(selected.url); 
             setProduct(prevProduct => ({
                 
                 ...prevProduct,
@@ -130,7 +126,6 @@ export default function Details() {
                     )}
                 </div>
 
-                {/* Показваме бутоните за редактиране и изтриване само ако потребителят е собственик */}
                 {isOwner && (
                     <div className="flex gap-4 mt-4">
                         <button onClick={() => navigate(`/edit/${product.id}`)} className="bg-yellow-500 text-white p-2 rounded">

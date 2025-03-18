@@ -1,14 +1,8 @@
 import { useState } from "react";
 
-
-
 export default function Search({ onSearch, searchQuery, handleClear }) {
 
-    const [inputValue, setInputValue] = useState(searchQuery);    // const [clear, setClear] = useState('')
-
-
-    // console.log(setFilteredProducts);
-
+    const [inputValue, setInputValue] = useState(searchQuery);    
 
     const handleChange = (e) => {
         setInputValue(e.target.value);
@@ -18,7 +12,10 @@ export default function Search({ onSearch, searchQuery, handleClear }) {
         onSearch(inputValue);
     };
 
-
+    const handleClearInput = () => {
+        setInputValue('')
+        handleClear()
+    }
 
 
     return (
@@ -40,7 +37,7 @@ export default function Search({ onSearch, searchQuery, handleClear }) {
 
             <button
                 className="bg-black text-white border border-gray-600 border-b-4 font-medium overflow-hidden relative px-4 py-2 rounded-md hover:brightness-110 hover:border-t-4 hover:border-b active:opacity-75 outline-none duration-300 group"
-                onClick={handleClear}
+                onClick={handleClearInput}
             >
                 Изчисти
             </button>

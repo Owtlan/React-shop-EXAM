@@ -17,13 +17,11 @@ export default function Catalog({ category, showLiked, ratingFilter,searchQuery 
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 8;
 
-
     useEffect(() => {
         const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
             setCurrentUser(user);
         });
 
-        // Следим за промени в продуктите
         const unsubscribeProducts = onSnapshot(collection(db, "products"), (snapshot) => {
             const productsList = snapshot.docs.map(doc => ({
                 id: doc.id,
@@ -34,8 +32,8 @@ export default function Catalog({ category, showLiked, ratingFilter,searchQuery 
         });
 
         return () => {
-            unsubscribeAuth(); // Спираме слушателя за auth
-            unsubscribeProducts(); // Спираме слушателя за продукти
+            unsubscribeAuth(); 
+            unsubscribeProducts();
         };
     }, []);
 
@@ -48,19 +46,15 @@ export default function Catalog({ category, showLiked, ratingFilter,searchQuery 
                 (product.likedBy?.length || 0) <= ratingFilter[1];
         })
         .filter(product => {
-            if (!product.name) return false;  // Skip products without a name
+            if (!product.name) return false; 
             return product.name.toLowerCase().includes(searchQuery?.toLowerCase() || "");
         });
-    console.log("Filtered products in catalog:", filteredProducts);
 
     const indexOfLastProduct = currentPage * productsPerPage
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
     const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct)
 
     const totalPages = Math.ceil(filteredProducts.length / productsPerPage)
-
-
-    // const displayProducts = filteredProducts.length > 5 ? filteredProducts.slice(0, 8) : filteredProducts;
 
     if (loading) {
         return (
@@ -76,7 +70,6 @@ export default function Catalog({ category, showLiked, ratingFilter,searchQuery 
         );
     }
 
-    // Ако няма продукти, показваме съобщение
     if (filteredProducts.length === 0) {
         return <p className="text-center text-lg mt-10">Няма налични продукти с тези филтри.</p>;
     }
@@ -84,8 +77,6 @@ export default function Catalog({ category, showLiked, ratingFilter,searchQuery 
     return (
         <div className="container mx-auto pt-15 lg:p-8 animate__animated animate__fadeIn">
             <h2 className="text-3xl font-semibold text-center mb-6 text-sky-800 animate__animated animate__bounce">Каталог</h2>
-
-
 
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6">
                 {currentProducts.map((product) => (
@@ -122,11 +113,7 @@ export default function Catalog({ category, showLiked, ratingFilter,searchQuery 
 
                         {currentUser && product.userId !== currentUser?.uid && (
                             <>
-
                                 <LikeButton productId={product.id} likedBy={product.likedBy || []} />
-
-
-
 
                                 <button
                                     onClick={() => addToCart(product)}

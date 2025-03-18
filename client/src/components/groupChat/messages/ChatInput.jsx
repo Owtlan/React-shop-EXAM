@@ -19,11 +19,7 @@ export default function ChatInput({ userId }) {
         e.preventDefault();
         if (!message.trim() || !currentUser) return;
 
-        console.log("👉 Current user ID:", currentUser?.uid);
-        console.log("👉 Chat partner ID:", userId);
         const chatId = generateChatId(currentUser.uid, userId);
-        console.log("✅ Generated chatId:", chatId);
-
 
         await addDoc(collection(db, "chats", chatId, "messages"), {
             text: message,

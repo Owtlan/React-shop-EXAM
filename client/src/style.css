@@ -6,26 +6,10 @@
 
 .dark {
   background-color: #121212;
-  /* Тъмен фон */
-
-  /* Бял текст */
 }
 
-html {}
 
 body {
   transition: background-color 0.3s ease, color 0.3s ease;
   font-family: 'Poppins', sans-serif;
-  /* background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%); */
-  /* min-height: 100vh; */
 }
-
-/* body {
-  margin: 0px;
-  padding: 0px;
-}
-
-h1 {
-  color: red;
-  text-align: center;
-} */

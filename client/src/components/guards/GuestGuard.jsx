@@ -3,10 +3,6 @@ import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { auth } from "../../firebase-config";
 
-
-
-
-
 export default function GuestGuard({ children }) {
 
     const [user, setUser] = useState(null);
@@ -37,5 +33,5 @@ export default function GuestGuard({ children }) {
         );
     }
 
-    return user ? <Navigate to="/" /> : children; // ✅ Само за гости (нелогнати)
+    return user ? <Navigate to="/" /> : children;
 }

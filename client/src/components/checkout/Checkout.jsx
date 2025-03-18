@@ -5,10 +5,8 @@ import { db } from "../../firebase-config";
 import { useState } from "react";
 
 
-
 const Checkout = () => {
     const { cart, clearCart, removeFromCart } = useCart();
-
 
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
@@ -99,7 +97,6 @@ const Checkout = () => {
                             Общо: {cart.reduce((sum, product) => sum + product.totalPrice, 0).toFixed(2)} лв. {/* Показване на крайна сума */}
                         </div>
 
-                        {/* 🔥 Формата се показва само ако има продукти в количката */}
                         <form onSubmit={handleOrderSubmit} className="max-w-lg mx-auto bg-white p-6 shadow-md rounded-lg mt-6">
                             <label className="block mb-2">Име:</label>
                             <input
