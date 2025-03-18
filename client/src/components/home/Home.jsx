@@ -14,28 +14,29 @@ export default function Home() {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [searchQuery, setSearchQuery] = useState('')
-    const [users, setUsers] = useState([])
+    // const [users, setUsers] = useState([])
     // console.log("Rating filter:", ratingFilter);
 
     const [filteredProducts, setFilteredProducts] = useState([])
 
 
 
-    useEffect(() => {
-        const fetchUsers = async () => {
-            setLoading(true);
-            const usersCollection = await getDocs(collection(db, 'users'));
-            const userList = usersCollection.docs.map((doc) => ({
-                uid: doc.id,
-                email: doc.data().email,
-            }));
 
-            setUsers(userList);
-            setLoading(false);
-        };
+    // useEffect(() => {
+    //     const fetchUsers = async () => {
+    //         setLoading(true);
+    //         const usersCollection = await getDocs(collection(db, 'users'));
+    //         const userList = usersCollection.docs.map((doc) => ({
+    //             uid: doc.id,
+    //             email: doc.data().email,
+    //         }));
 
-        fetchUsers();
-    }, []);
+    //         setUsers(userList);
+    //         setLoading(false);
+    //     };
+
+    //     fetchUsers();
+    // }, []);
 
 
 
@@ -52,6 +53,7 @@ export default function Home() {
                 }));
                 console.log("Loaded products from Firebase:", productList);
                 setProducts(productList);  // Обновяваме state с продуктите
+                setFilteredProducts(productList)
             } catch (error) {
                 console.error("Грешка при зареждане на продуктите:", error);
             } finally {
@@ -83,6 +85,11 @@ export default function Home() {
     };
 
 
+    const handleClear = () => {
+        setSearchQuery('')
+        setFilteredProducts(products)
+    }
+
     if (loading) {
         return (
             <div className="flex items-center justify-center h-screen">
@@ -99,7 +106,7 @@ export default function Home() {
             <div className="pt-15 sm:pt-10 w-2/6 lg:w-1/6 md:w-1/4 sm:w-1/4 p-4 bg-gray-100 min-h-screen">
                 <div className="max-w-xs mx-auto">
 
-                    <Search onSearch={handleSearch} />
+                    <Search onSearch={handleSearch} searchQuery={searchQuery} handleClear={handleClear} />
 
                     <h3 className="sm:text-xl text-base font-bold mb-4">Филтриране</h3>
                     {/* <button
@@ -205,7 +212,7 @@ export default function Home() {
             </div>
 
             <div className="flex-1 p-4 max-w-screen-lg mx-auto">
-                <Catalog category={category} showLiked={showLiked} ratingFilter={ratingFilter} products={filteredProducts} searchQuery={searchQuery} />
+                <Catalog category={category} showLiked={showLiked} ratingFilter={ratingFilter} searchQuery={searchQuery} />
             </div>
         </div>
     );
