@@ -9,6 +9,9 @@ const Checkout = () => {
     const { cart, clearCart, removeFromCart } = useCart();
 
     const [loading, setLoading] = useState(false)
+    const [error, setError] = useState('')
+
+
     const navigate = useNavigate();
 
     const [userInfo, setUserInfo] = useState({
@@ -25,10 +28,28 @@ const Checkout = () => {
     const handleOrderSubmit = async (e) => {
         e.preventDefault();
 
-        if (!userInfo.name || !userInfo.address || !userInfo.phone || !userInfo.postalCode) {
+        const nameRegex = /^[A-Za-z\s]+$/;
+
+        if (!userInfo.name || !nameRegex.test(userInfo.name)) {
+            setError("Името трябва да съдържа само букви и интервали.");
+            return;
+        }
+
+        const phoneRegex = /^[0-9]{10}$/;
+
+        if (!userInfo.phone || !phoneRegex.test(userInfo.phone)) {
+            setError("Телефонният номер трябва да съдържа точно 10 цифри.");
+            return;
+        }
+
+        if (!userInfo.address || !userInfo.postalCode) {
             alert("Моля, попълнете всички полета!");
             return;
         }
+
+
+        setError("");
+
 
         try {
             setLoading(true);
@@ -36,7 +57,7 @@ const Checkout = () => {
             await addDoc(collection(db, "orders"), {
                 ...userInfo,
                 cart,
-                total: cart.reduce((sum, product) => sum + product.price, 0),
+                total: cart.reduce((sum, product) => sum + product.totalPrice, 0),
                 createdAt: new Date(),
             })
 
@@ -97,6 +118,7 @@ const Checkout = () => {
                             Общо: {cart.reduce((sum, product) => sum + product.totalPrice, 0).toFixed(2)} лв. {/* Показване на крайна сума */}
                         </div>
 
+                        {error && <p className="error-message text-red-500">{error}</p>}
                         <form onSubmit={handleOrderSubmit} className="max-w-lg mx-auto bg-white p-6 shadow-md rounded-lg mt-6">
                             <label className="block mb-2">Име:</label>
                             <input
