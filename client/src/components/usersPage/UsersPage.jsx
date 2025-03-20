@@ -75,7 +75,7 @@ export default function UsersPage() {
     }
 
     return (
-        <div className="max-w-6xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+        <div className="max-w-6xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-60">
             <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">📜 Списък с потребители</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
