@@ -68,9 +68,9 @@ export const BackgroundBeamsWithCollision = ({
     return (
         <div
             ref={parentRef}
-         className={cn(
-            // here need to fix some things
-                "h-auto md:h-auto bg-gradient-to-b from-white to-neutral-100 dark:from-neutral-950 dark:to-neutral-800 relative flex items-center w-full justify-center overflow-hidden",
+            className={cn(
+                // here need to fix some things
+                "h-auto md:h-auto bg-gradient-to-b dark:from-neutral-950 dark:to-neutral-800 relative flex items-center w-full justify-center overflow-hidden",
                 // h-full will make it take 100% height of parent container
                 className
             )}
