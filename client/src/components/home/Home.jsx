@@ -84,7 +84,7 @@ export default function Home() {
                     <h3 className="sm:text-xl text-base font-bold mb-4">Филтриране</h3>
 
                     <button
-                        className="group flex w-fit cursor-pointer items-center gap-2 overflow-hidden border rounded-full border-pink-700 fill-none p-2 px-3 font-extrabold text-pink-500 transition-all active:scale-90 peer-checked:fill-pink-500 peer-checked:hover:text-white"
+                        className="group flex w-full cursor-pointer items-center gap-2 overflow-hidden border rounded-full border-pink-700 fill-none p-2 px-3 font-extrabold text-pink-500 transition-all active:scale-90 peer-checked:fill-pink-500 peer-checked:hover:text-white text-xs sm:text-sm md:text-sm lg:text-sm xl:text-base"
                         onClick={() => setShowLiked(!showLiked)}
                     >
                         <div className="z-10 transition group-hover:translate-x-4">Само харесаните</div>
