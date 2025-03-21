@@ -22,15 +22,15 @@ export default function Search({ onSearch, searchQuery, handleClear }) {
     return (
         <div className="mb-4">
             <div className="relative">
-                <form className="form relative" onSubmit={handleSearch}> {/* Добавяне на onSubmit */}
-                    <button className="absolute left-2 -translate-y-1/2 top-1/2 p-1">
+                <form className="form relative w-full" onSubmit={handleSearch}> {/* Добавяне на onSubmit */}
+                    <button className="absolute left-2 -translate-y-1/2 top-1/2 p-1 lg:left-3 sm:left-2">
                         <svg
                             width="17"
                             height="16"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
                             role="img"
-                            ariaLabelledby="search"
+                            aria-labelledby="search"
                             className="w-5 h-5 text-gray-700"
                         >
                             <path
@@ -43,14 +43,14 @@ export default function Search({ onSearch, searchQuery, handleClear }) {
                         </svg>
                     </button>
                     <input
-                        className="input rounded-full px-8 py-3 border-2 border-transparent focus:outline-none focus:border-blue-500 placeholder-gray-400 transition-all duration-300 shadow-md"
+                        className="input w-full rounded-full px-8 py-3 border-2 border-transparent focus:outline-none focus:border-blue-500 placeholder-gray-400 transition-all duration-300 shadow-md sm:w-4/4 md:w-4/4 lg:w-1/1"
                         placeholder="Search..."
                         required=""
                         type="text"
                         value={inputValue}
                         onChange={handleChange}
                     />
-                    <button type="reset" className="absolute right-3 -translate-y-1/2 top-1/2 p-1" onClick={handleClearInput}>
+                    <button type="reset" className="absolute right-3 -translate-y-1/2 top-1/2 p-1 lg:right-4 sm:right-3" onClick={handleClearInput}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="w-5 h-5 text-gray-700"
@@ -69,43 +69,4 @@ export default function Search({ onSearch, searchQuery, handleClear }) {
             </div>
         </div>
     )
-
-
-
-
-
-    {/* <input
-                    placeholder="Search..."
-                    className="input shadow-lg focus:border-2 border-gray-300 px-5 py-3 rounded-xl w-56 transition-all focus:w-64 outline-none"
-                    name="search"
-                    type="search"
-                    value={inputValue}
-                    onChange={handleChange}
-                />
-
-                <svg
-                    className="size-6 absolute top-3 right-3 text-gray-500"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    onClick={handleSearch}
-                >
-                    <path
-                        d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-                        strokeLinejoin="round"
-                        strokeLinecap="round"
-                    ></path>
-                </svg>
-            </div>
-
-            <button
-                className="bg-black text-white border border-gray-600 border-b-4 font-medium overflow-hidden relative px-4 py-2 rounded-md hover:brightness-110 hover:border-t-4 hover:border-b active:opacity-75 outline-none duration-300 group"
-                onClick={handleClearInput}
-            >
-                Изчисти
-            </button> */}
-
-
 }
