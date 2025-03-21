@@ -51,7 +51,7 @@ export default function Chat() {
     if (!chatPartnerId) return <p>Грешка: Потребителят не е намерен.</p>;
 
     return (
-        <div className="max-w-lg mx-auto shadow-md rounded-lg overflow-hidden">
+        <div className="max-w-lg mx-auto shadow-md rounded-lg overflow-hidden mt-20">
             <h2>Чат с {chatPartnerId}</h2>
             <ChatMessages userId={chatPartnerId} />
             <ChatInput userId={chatPartnerId} />
