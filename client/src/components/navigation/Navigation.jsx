@@ -31,7 +31,7 @@ const Navbar = () => {
     }, []);
 
     return (
-        <nav className={`flex flex-col lg:flex-row bg-gray-800 bg-opacity-90 p-4 fixed top-0 w-full transition-opacity duration-300 z-50 ${showNavBar ? "opacity-100" : "opacity-0"}`}>
+        <nav className={`flex flex-row justify-between lg:flex-row bg-gray-800 bg-opacity-90 p-4 fixed top-0 w-full transition-opacity duration-300 z-50 ${showNavBar ? "opacity-100" : "opacity-0"}`}>
             {isMobile && (
                 <div>
                     <button
@@ -82,14 +82,14 @@ const Navbar = () => {
                                                 <li key={product.id} className="flex items-center justify-between py-2 border-b">
                                                     <img src={product.imageUrl} alt={product.name} className="w-10 h-10 object-contain pr-2" />
                                                     <p className="text-sm">{product.name} (x{product.quantity})</p>
-                                                    <p className="text-sm font-semibold">{product.totalPrice.toFixed(2)} лв.</p> 
+                                                    <p className="text-sm font-semibold">{product.totalPrice.toFixed(2)} лв.</p>
                                                     <button onClick={() => removeFromCart(product.id)} className="text-red-500 text-lg font-bold">✖</button>
                                                 </li>
                                             ))}
                                         </ul>
 
                                         <div className="mt-2 text-right font-semibold text-lg">
-                                            Общо: {cart.reduce((sum, product) => sum + product.totalPrice, 0).toFixed(2)} лв. 
+                                            Общо: {cart.reduce((sum, product) => sum + product.totalPrice, 0).toFixed(2)} лв.
                                         </div>
 
                                         <Link to="/checkout" className="block mt-3 bg-green-500 text-white text-center py-2 rounded-md hover:bg-green-600 transition">
@@ -111,10 +111,12 @@ const Navbar = () => {
             </ul>
 
             {isAuthenticated && (
-                <div className="flex items-center space-x-4 lg:ml-auto list-none">
+                <div className="flex flex-col lg:flex-row items-center space-x-4 lg:ml-auto list-none">
                     <li className="text-amber-50 font-bold text-xs sm:text-base">Email: {auth.currentUser?.email}</li>
-                    <ThemeToggle />
-                    <li><Logout /></li>
+                    <div className="flex gap-2.5 items-center">
+                        <ThemeToggle />
+                        <li><Logout /></li>
+                    </div>
                 </div>
             )}
         </nav>
