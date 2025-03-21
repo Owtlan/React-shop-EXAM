@@ -13,8 +13,8 @@ export default function Catalog({ category, showLiked, ratingFilter,searchQuery 
     const { addToCart } = useCart();
 
     const [currentUser, setCurrentUser] = useState(null);
-
     const [currentPage, setCurrentPage] = useState(1);
+    
     const productsPerPage = 8;
 
     useEffect(() => {
@@ -113,7 +113,7 @@ export default function Catalog({ category, showLiked, ratingFilter,searchQuery 
 
                         {currentUser && product.userId !== currentUser?.uid && (
                             <>
-                                <LikeButton productId={product.id} likedBy={product.likedBy || []} />
+                            <LikeButton productId={product.id} likedBy={product.likedBy || []} />
 
                                 <button
                                     onClick={() => addToCart(product)}

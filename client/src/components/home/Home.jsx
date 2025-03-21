@@ -3,7 +3,7 @@ import Catalog from "../catalog/Catalog";
 import { collection, getDocs, query } from "firebase/firestore";
 import { db, auth } from "../../firebase-config";
 import Search from "../search/Search";
-
+import { BackgroundBeamsWithCollision } from "../ui/BackgroundBeamsWithCollision";
 
 export default function Home() {
     const [category, setCategory] = useState('');
@@ -26,8 +26,8 @@ export default function Home() {
                     description: doc.data().description,
                     price: doc.data().price
                 }));
-               
-                setProducts(productList); 
+
+                setProducts(productList);
                 setFilteredProducts(productList)
             } catch (error) {
                 console.error("Грешка при зареждане на продуктите:", error);
@@ -73,7 +73,9 @@ export default function Home() {
     }
 
     return (
+
         <div className="flex min-h-screen sm:pt-10 lg:pt-0 animate__animated animate__fadeIn">
+
             <div className="pt-15 sm:pt-10 w-2/6 lg:w-1/6 md:w-1/4 sm:w-1/4 p-4 bg-gray-100 min-h-screen">
                 <div className="max-w-xs mx-auto">
 
@@ -171,10 +173,11 @@ export default function Home() {
 
                 </div>
             </div>
-
-            <div className="flex-1 p-4 max-w-screen-lg mx-auto">
-                <Catalog category={category} showLiked={showLiked} ratingFilter={ratingFilter} searchQuery={searchQuery} />
-            </div>
+            <BackgroundBeamsWithCollision>
+                <div className="flex-1 p-4 max-w-screen-lg mx-auto">
+                    <Catalog category={category} showLiked={showLiked} ratingFilter={ratingFilter} searchQuery={searchQuery} />
+                </div>
+            </BackgroundBeamsWithCollision>
         </div>
     );
 }

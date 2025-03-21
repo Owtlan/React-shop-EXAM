@@ -48,12 +48,10 @@ export const CartProvider = ({ children }) => {
             const productWithUserId = { ...product, userId: user.uid };
 
             setCart((prevCart) => {
-                console.log(prevCart);
-                
+        
                 const existingProductIndex = prevCart.findIndex(item => item.id === productWithUserId.id);
 
                 if (existingProductIndex !== -1) {
-                    // Ако продуктът вече съществува в количката, увеличаваме количеството му и актуализираме цената
                     const updatedCart = [...prevCart];
                     updatedCart[existingProductIndex].quantity += 1;
                     updatedCart[existingProductIndex].totalPrice = updatedCart[existingProductIndex].quantity * productWithUserId.price;
@@ -61,7 +59,6 @@ export const CartProvider = ({ children }) => {
 
                     return updatedCart;
                 } else {
-                    // Ако продуктът не съществува в количката, добавяме го с quantity = 1 и изчисляваме totalPrice
                     return [
                         ...prevCart,
                         {
@@ -83,20 +80,16 @@ export const CartProvider = ({ children }) => {
                 const updatedCart = [...prevCart];
                 const product = updatedCart[productIndex];
 
-                // Ако количеството на продукта е повече от 1, намаляваме количеството му
                 if (product.quantity > 1) {
                     updatedCart[productIndex].quantity -= 1;
                     updatedCart[productIndex].totalPrice = updatedCart[productIndex].quantity * product.price;
                 } else {
-                    // Ако количеството е 1, премахваме продукта напълно
                     updatedCart.splice(productIndex, 1);
                 }
 
-                // Ако количката е празна, изтриваме я от localStorage
                 if (updatedCart.length === 0) {
                     localStorage.removeItem("cart");
                 } else {
-                    // Актуализираме localStorage със текущото състояние на количката
                     localStorage.setItem("cart", JSON.stringify(updatedCart));
                 }
 
