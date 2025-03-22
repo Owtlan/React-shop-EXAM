@@ -4,6 +4,8 @@ import { collection, getDocs, query } from "firebase/firestore";
 import { db, auth } from "../../firebase-config";
 import Search from "../search/Search";
 import { BackgroundBeamsWithCollision } from "../ui/BackgroundBeamsWithCollision";
+import StarIcon from '@mui/icons-material/Star';
+
 
 export default function Home() {
     const [category, setCategory] = useState('');
@@ -107,10 +109,17 @@ export default function Home() {
                     {[[1, 3], [4, 6], [7, 10], [11, 15], [16, 20]].map(([min, max]) => (
                         <button
                             key={`${min}-${max}`}
-                            className={`w-full py-2 mb-2 rounded ${ratingFilter?.[0] === min ? "bg-green-500 text-white" : "bg-gray-200 text-black"}`}
+                            className={`w-full py-4 mb-4 rounded-full transition-all duration-300 ease-in-out transform 
+                           ${ratingFilter?.[0] === min
+                                    ? "bg-gradient-to-r from-purple-400 to-pink-500 text-white shadow-2xl scale-105"
+                                    : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:shadow-lg hover:scale-105"}`}
                             onClick={() => setRatingFilter(ratingFilter?.[0] === min ? null : [min, max])}
                         >
-                            {min}-{max} ⭐
+                            <div className="flex items-center justify-center space-x-3">
+                                {/* Звезда с анимация при клик */}
+                                <StarIcon style={{ fontSize: '28px', color: ratingFilter?.[0] === min ? 'yellow' : 'gray' }} />
+                                <span className="text-xl font-semibold">{min}-{max}</span>
+                            </div>
                         </button>
                     ))}
                 </div>
