@@ -1,5 +1,5 @@
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { db, auth } from "../../../firebase-config";
 import { generateChatId } from "../../utils";
 
@@ -7,6 +7,8 @@ import { generateChatId } from "../../utils";
 export default function ChatMessages({ userId }) {
     const [messages, setMessages] = useState([]);
     const [currentUser, setCurrentUser] = useState(null);
+    const messagesEndRef = useRef(null);
+
 
     useEffect(() => {
         const unsubscribeAuth = auth.onAuthStateChanged((user) => {
@@ -15,7 +17,7 @@ export default function ChatMessages({ userId }) {
 
         return () => unsubscribeAuth();
     }, []);
- 
+
     useEffect(() => {
         if (!currentUser || !userId) return;
 
@@ -36,6 +38,13 @@ export default function ChatMessages({ userId }) {
         return () => unsubscribe();
     }, [userId, currentUser]);
 
+    useEffect(() => {
+        if (messagesEndRef.current) {
+            messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+    }, [messages])
+
+
     if (!currentUser) {
         return <p>Зареждане...</p>;
     }
@@ -43,7 +52,7 @@ export default function ChatMessages({ userId }) {
     return (
         <div className="p-4 h-96 overflow-y-auto bg-gray-100">
             {messages.map((msg) => {
-                const isCurrentUser = msg.senderId === currentUser?.uid; 
+                const isCurrentUser = msg.senderId === currentUser?.uid;
 
                 return (
                     <div
@@ -55,6 +64,7 @@ export default function ChatMessages({ userId }) {
                     </div>
                 );
             })}
+            <div ref={messagesEndRef} />
         </div>
     );
 
