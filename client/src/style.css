@@ -13,8 +13,16 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
   font-family: 'Poppins', sans-serif;
 }
+.navbar-open {
+  padding-bottom: 20px; /* Задай толкова височина, колкото е височината на менюто */
+}
 
-
+.navbar {
+  transition: padding-bottom 0.3s ease;
+}
+body.menu-open {
+  padding-top: 50px; /* Колкото е височината на менюто */
+}
 /* @theme inline {
   --animate-aurora: aurora 60s linear infinite;
   @keyframes aurora {
