@@ -30,28 +30,37 @@ const Navbar = () => {
         };
     }, []);
 
-    return (
-        <nav className={`flex flex-row justify-between lg:flex-row bg-gray-800 bg-opacity-90 p-4 fixed top-0 w-full transition-opacity duration-300 z-50 ${showNavBar ? "opacity-100" : "opacity-0"}`}>
-            {isMobile && (
-                <div>
-                    <button
-                        onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        className="relative group md:hidden focus:outline-none">
-                        <div className="relative flex overflow-hidden items-center justify-center rounded-full w-[50px] h-[50px] transform transition-all bg-slate-700 ring-0 ring-gray-300 hover:ring-8 group-focus:ring-4 ring-opacity-30 duration-200 shadow-md">
-                            <div className="flex flex-col justify-between w-[20px] h-[20px] transform transition-all duration-300 origin-center overflow-hidden">
-                                <span className={`bg-white h-[2px] w-7 transform transition-all duration-300 origin-left ${isMenuOpen ? "translate-x-10" : ""}`}></span>
-                                <span className={`bg-white h-[2px] w-7 rounded transform transition-all duration-300 delay-75 ${isMenuOpen ? "translate-x-10" : ""}`}></span>
-                                <span className={`bg-white h-[2px] w-7 transform transition-all duration-300 origin-left delay-150 ${isMenuOpen ? "translate-x-10" : ""}`}></span>
+    useEffect(() => {
+        if (isMenuOpen) {
+            document.body.classList.add('menu-open');
+        } else {
+            document.body.classList.remove('menu-open');
+        }
+    }, [isMenuOpen]);
 
-                                <div className={`absolute items-center justify-between transform transition-all duration-500 top-2.5 flex w-0 group-focus:w-12 ${isMenuOpen ? "translate-x-0 w-12" : "-translate-x-10"}`}>
-                                    <span className={`absolute bg-white h-[2px] w-5 transform transition-all duration-500 delay-300 ${isMenuOpen ? "rotate-45" : "rotate-0"}`}></span>
-                                    <span className={`absolute bg-white h-[2px] w-5 transform transition-all duration-500 delay-300 ${isMenuOpen ? "-rotate-45" : "rotate-0"}`}></span>
-                                </div>
+    return (
+        <nav
+            className={`navbar flex flex-row justify-between lg:flex-row bg-gray-800 bg-opacity-90 p-4 fixed top-0 w-full transition-opacity duration-300 z-50 ${showNavBar ? "opacity-100" : "opacity-0"} ${isMenuOpen ? "navbar-open" : ""}`}
+        >            {isMobile && (
+            <div>
+                <button
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    className="relative group md:hidden focus:outline-none">
+                    <div className="relative flex overflow-hidden items-center justify-center rounded-full w-[50px] h-[50px] transform transition-all bg-slate-700 ring-0 ring-gray-300 hover:ring-8 group-focus:ring-4 ring-opacity-30 duration-200 shadow-md">
+                        <div className="flex flex-col justify-between w-[20px] h-[20px] transform transition-all duration-300 origin-center overflow-hidden">
+                            <span className={`bg-white h-[2px] w-7 transform transition-all duration-300 origin-left ${isMenuOpen ? "translate-x-10" : ""}`}></span>
+                            <span className={`bg-white h-[2px] w-7 rounded transform transition-all duration-300 delay-75 ${isMenuOpen ? "translate-x-10" : ""}`}></span>
+                            <span className={`bg-white h-[2px] w-7 transform transition-all duration-300 origin-left delay-150 ${isMenuOpen ? "translate-x-10" : ""}`}></span>
+
+                            <div className={`absolute items-center justify-between transform transition-all duration-500 top-2.5 flex w-0 group-focus:w-12 ${isMenuOpen ? "translate-x-0 w-12" : "-translate-x-10"}`}>
+                                <span className={`absolute bg-white h-[2px] w-5 transform transition-all duration-500 delay-300 ${isMenuOpen ? "rotate-45" : "rotate-0"}`}></span>
+                                <span className={`absolute bg-white h-[2px] w-5 transform transition-all duration-500 delay-300 ${isMenuOpen ? "-rotate-45" : "rotate-0"}`}></span>
                             </div>
                         </div>
-                    </button>
-                </div>
-            )}
+                    </div>
+                </button>
+            </div>
+        )}
 
             <ul className={`md:flex ${isMobile ? (isMenuOpen ? "flex flex-col" : "hidden") : "flex"} space-x-6 text-white`}>
                 <li><Link to="/" className="text-base sm:text-lg font-semibold hover:text-orange-500 transition-colors">Начало</Link></li>
