@@ -138,34 +138,6 @@ export default function Catalog({ category, showLiked, ratingFilter, searchQuery
                 ))}
             </div>
 
-
-
-            {/* {currentUser && (
-                            <>
-                                <LikeButton productId={product.id} likedBy={product.likedBy || []} userId={product.userId} />
-
-                                <button
-                                    onClick={() => addToCart(product)}
-                                    className="relative inline-flex items-center justify-center px-4 py-2 text-base font-semibold text-white transition-all duration-300 ease-in-out transform bg-gradient-to-r from-green-400 to-green-600 rounded-full shadow-md group hover:scale-105 hover:rotate-3 hover:shadow-xl"
-                                >
-                                    <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-green-500 to-green-700 opacity-20 group-hover:opacity-0 transition-all duration-300 rounded-full"></span>
-                                    <span className="absolute inset-0 w-full h-full border-2 border-green-500 rounded-full group-hover:border-transparent transition-all duration-300"></span>
-                                    <span className="relative z-10">Купи сега</span>
-                                </button>
-                            </>
-                        )} */}
-
-
-
-
-
-
-
-
-
-
-
-
             < div className="flex justify-center mt-4" >
 
                 <button
