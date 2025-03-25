@@ -57,19 +57,21 @@ export default function CreateProduct() {
         }
     };
 
-    // const handleImageChange = async (selectedImage) => {
-    //     setImage(selectedImage);
-    //     if (!imageUrl) {
-    //         const url = await uploadImage(selectedImage);
-    //         setImageUrl(url);
-    //     }
-    // };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!name || !price || !description || !imageUrl || !category || colorImages.length === 0) {
             setError("Моля, попълнете всички полета!");
+            return;
+        }
+
+        if (!name || name.length < 6) {
+            setError("Името на продукта трябва да съдържа поне 6 букви!");
+            return;
+        }
+
+        if (!description || description.length < 10) {
+            setError("Описанието трябва да съдържа поне 10 букви!");
             return;
         }
 

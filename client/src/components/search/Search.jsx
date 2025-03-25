@@ -22,7 +22,7 @@ export default function Search({ onSearch, searchQuery, handleClear }) {
     return (
         <div className="mb-4">
             <div className="relative">
-                <form className="form relative w-full" onSubmit={handleSearch}> {/* Добавяне на onSubmit */}
+                <form className="form relative w-full" onSubmit={handleSearch}>
                     <button className="absolute left-2 -translate-y-1/2 top-1/2 p-1 lg:left-3 sm:left-2">
                         <svg
                             width="17"

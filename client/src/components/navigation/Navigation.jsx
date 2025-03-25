@@ -9,7 +9,7 @@ import ThemeToggle from "../themetoggle/ThemeToggle";
 const Navbar = () => {
     const { isAuthenticated } = useContext(AuthContext);
     const { cart, removeFromCart } = useCart();
-    const auth = getAuth();
+    const auth = getAuth(); 
 
 
     const [showNavBar, setShowNavBar] = useState(true);

@@ -15,6 +15,7 @@ export default function UsersPage() {
                 email: doc.data().email,
                 isOnline: doc.data().isOnline || false,
             }));
+
             setUsers(userList);
             setLoading(false);
         });
@@ -58,6 +59,7 @@ export default function UsersPage() {
     }, []);
 
     const onlineUsers = users.filter(user => user.isOnline);
+    
     const offlineUsers = users.filter(user => !user.isOnline);
 
     if (loading) {

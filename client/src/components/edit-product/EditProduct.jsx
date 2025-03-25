@@ -28,7 +28,7 @@ export default function EditProduct() {
             setLoading(true)
 
             try {
-              
+
                 const docRef = doc(db, "products", id)
                 const docSnap = await getDoc(docRef)
 
@@ -62,10 +62,28 @@ export default function EditProduct() {
     const handleUpdate = async (e) => {
         e.preventDefault();
 
+
         if (!name || !price || !description || !category) {
             setError("Моля, попълнете всички полета!")
             return;
         }
+
+        if (!name || name.length < 6) {
+            setError("Името на продукта трябва да съдържа поне 6 букви!");
+            return;
+        }
+
+        if (!description || description.length < 10) {
+            setError("Описанието трябва да съдържа поне 10 букви!");
+            return;
+        }
+
+        if (price <= 0) {
+            setError("Цената трябва да бъде положителна!");
+            return;
+        }
+
+
 
         try {
             const productRef = doc(db, "products", id);
@@ -98,7 +116,8 @@ export default function EditProduct() {
         )
     }
 
-    if (error) return <p className="text-center text-lg mt-10 text-red-500">{error}</p>;
+    { error && <p className="text-red-500 text-center mt-4">{error}</p> }
+
 
 
     return (
