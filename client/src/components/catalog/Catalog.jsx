@@ -76,12 +76,12 @@ export default function Catalog({ category, showLiked, ratingFilter, searchQuery
 
     return (
         <div className="container mx-auto animate__animated animate__fadeIn pt-12 sm:pt-7">
-            <h2 className="text-3xl font-semibold text-center mb-6 text-sky-800 sm:pt-10 animate__animated animate__bounce">Каталог</h2>
+            <h2 className="text-3xl font-semibold text-center mb-6 text-sky-800 sm:pt-10 animate__animated animate__pulse">Каталог</h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6 px-5">
                 {currentProducts.map((product) => (
                     <div key={product.id} className="bg-white p-4 shadow-lg rounded-lg
-                  text-sm sm:sm:text-lg relative flex flex-col justify-between
+                  text-sm sm:sm:text-lg relative flex flex-col justify-between animate__animated animate__fadeIn
                      ">
                         <div>
                             <img src={product.imageUrl} alt={product.name} className="w-full h-40 object-contain rounded" />
