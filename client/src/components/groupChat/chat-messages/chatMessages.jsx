@@ -50,22 +50,23 @@ export default function ChatMessages({ userId }) {
     }
 
     return (
-        <div className="p-4 h-96 overflow-y-auto bg-gray-100">
-            {messages.map((msg) => {
-                const isCurrentUser = msg.senderId === currentUser?.uid;
+        <div className="p-4 h-96 overflow-y-auto bg-gray-50 rounded-lg">
+        {messages.map((msg) => {
+            const isCurrentUser = msg.senderId === currentUser?.uid;
 
-                return (
-                    <div
-                        key={msg.id}
-                        className={`p-2 my-2 rounded w-fit ${isCurrentUser ? "bg-blue-200 ml-auto text-right" : "bg-gray-200"
-                            }`}
-                    >
-                        <p>{msg.text}</p>
-                    </div>
-                );
-            })}
-            <div ref={messagesEndRef} />
-        </div>
+            return (
+                <div
+                    key={msg.id}
+                    className={`message-enter p-3 my-2 rounded-lg w-fit max-w-[80%] ${
+                        isCurrentUser ? "bg-blue-500 text-white ml-auto" : "bg-gray-200 text-black"
+                    }`}
+                >
+                    <p>{msg.text}</p>
+                </div>
+            );
+        })}
+        <div ref={messagesEndRef} />
+    </div>
     );
 
 }
