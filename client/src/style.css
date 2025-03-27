@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 #root {
-  padding-top: 70px;
+  padding-top: 60px;
 }
 
 .dark {
@@ -13,6 +13,7 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
   font-family: 'Poppins', sans-serif;
 }
+
 .navbar-open {
   padding-bottom: 20px;
 }
@@ -20,6 +21,23 @@ body {
 .navbar {
   transition: padding-bottom 0.3s ease;
 }
+
 body.menu-open {
   padding-top: 50px;
+}
+
+@keyframes slideIn {
+  0% {
+      transform: translateY(50px);
+      opacity: 0;
+  }
+  100% {
+      transform: translateY(0);
+      opacity: 1;
+  }
+}
+
+/* Приложим за съобщенията */
+.message-enter {
+  animation: slideIn 0.5s ease-out forwards;
 }
