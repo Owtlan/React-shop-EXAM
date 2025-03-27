@@ -151,7 +151,7 @@ export default function EditProduct() {
                             <option value="Мъжки Обувки">Мъжки Обувки</option>
                             <option value="Мъжки Якета">Мъжки Якета</option>
                             <option value="Женски Якета">Женски Якета</option>
-                            <option value="Дамски Обувки">Дамски Обувки</option>
+                            <option value="Женски Обувки">Женски Обувки</option>
                             <option value="Мъжки Тениски">Мъжки Тениски</option>
                             <option value="Женски Тениски">Женски Тениски</option>
                             <option value="Женски Дънки">Женски Дънки</option>
