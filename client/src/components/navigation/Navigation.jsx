@@ -69,7 +69,7 @@ const Navbar = () => {
                 {isAuthenticated && (
                     <>
                         <li><Link to="/create" className="text-base sm:text-lg font-semibold hover:text-orange-500 transition-colors">Създай</Link></li>
-                        <li><Link to="/users" className="text-base sm:text-lg font-semibold hover:text-orange-500 transition-colors">Потребители</Link></li>
+                        <li><Link to="/users" className="text-base sm:text-lg font-semibold hover:text-orange-500 transition-colors">Чат с Потребители</Link></li>
 
                         <li className="relative group">
                             <Link to="/checkout" className="relative">
