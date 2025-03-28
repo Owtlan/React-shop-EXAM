@@ -85,7 +85,7 @@ const Checkout = () => {
     )
 
     return (
-        <div className="container mx-auto p-8">
+        <div className="container mx-auto pt-25">
             <h2 className="text-3xl font-semibold text-center mb-6">Завърши поръчката</h2>
 
             <div className="max-w-lg mx-auto bg-white p-6 shadow-md rounded-lg mb-6">
@@ -103,12 +103,24 @@ const Checkout = () => {
                                     <p className="text-sm font-semibold">{product.totalPrice.toFixed(2)} лв.</p> {/* Показване на общата цена */}
                                     <button
                                         onClick={() => removeFromCart(product.id)}
-                                        className="border-2 border-black group hover:border-green-500 w-12 h-12 duration-500 overflow-hidden"
+                                        className="relative border-2 border-black group hover:border-green-500 w-12 h-12 duration-500 overflow-hidden"
                                         type="button"
                                     >
                                         <p className="text-3xl h-full w-full flex items-center justify-center text-black duration-500 relative z-10 group-hover:scale-0">
                                             ×
                                         </p>
+                                        <span
+                                            className="absolute w-full h-full bg-green-500 rotate-45 group-hover:top-9 duration-500 top-12 left-0"
+                                        ></span>
+                                        <span
+                                            className="absolute w-full h-full bg-green-500 rotate-45 top-0 group-hover:left-9 duration-500 left-12"
+                                        ></span>
+                                        <span
+                                            className="absolute w-full h-full bg-green-500 rotate-45 top-0 group-hover:right-9 duration-500 right-12"
+                                        ></span>
+                                        <span
+                                            className="absolute w-full h-full bg-green-500 rotate-45 group-hover:bottom-9 duration-500 bottom-12 right-0"
+                                        ></span>
                                     </button>
                                 </li>
                             ))}
