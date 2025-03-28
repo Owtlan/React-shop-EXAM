@@ -1,9 +1,9 @@
 import './style.css'
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import Home from './components/home/Home.jsx'
+import Home from './components/core/home/Home.jsx'
 import Register from './components/user-actions/register/Register.jsx'
-import Navbar from './components/navigation/Navigation.jsx'
+import Navbar from './components/core/navigation/Navigation.jsx'
 import Login from './components/user-actions/login/Login.jsx'
 import Logout from './components/user-actions/logout/Logout.jsx'
 import CreateProduct from './components/create/CreateProduct.jsx'
@@ -15,7 +15,7 @@ import UsersPage from './components/usersPage/UsersPage.jsx'
 import Checkout from './components/checkout/Checkout.jsx'
 import AuthGuard from './components/GUards/AuthGuard.jsx'
 import GuestGuard from './components/guards/GuestGuard.jsx'
-import Footer from './components/footer/Footer.jsx'
+import Footer from './components/core/footer/Footer.jsx'
 
 function App() {
 
