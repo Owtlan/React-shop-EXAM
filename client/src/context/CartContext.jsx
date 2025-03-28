@@ -16,9 +16,7 @@ export const CartProvider = ({ children }) => {
                 const parsedCart = JSON.parse(savedCart);
 
                 if (user) {
-                    console.log(parsedCart);
-
-
+                    
                     const filteredCart = parsedCart.filter((product) => product.userId === user.uid)
                     setCart(filteredCart)
 
