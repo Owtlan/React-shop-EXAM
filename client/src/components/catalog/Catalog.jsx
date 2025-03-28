@@ -83,11 +83,11 @@ export default function Catalog({ category, showLiked, ratingFilter, searchQuery
                     <div key={product.id} className="bg-white p-4 shadow-lg rounded-lg
                   text-sm sm:sm:text-lg relative flex flex-col justify-between animate__animated animate__fadeIn
                      ">
-                        <div>
-                            <img src={product.imageUrl} alt={product.name} className="w-full h-40 object-contain rounded" />
+                        
                             <h3 className="font-semibold mt-3">{product.name}</h3>
+                            <img src={product.imageUrl} alt={product.name} className="w-full h-40 object-contain rounded" />
 
-                        </div>
+                        
                         <div>
                             <Link to={`/details/${product.id}`} className="">
                                 <button
@@ -117,21 +117,27 @@ export default function Catalog({ category, showLiked, ratingFilter, searchQuery
 
                         {currentUser && (
                             <>
-                                <LikeButton productId={product.id} likedBy={product.likedBy || []} userId={product.userId} />
+                                <div
+                                    className="flex flex-col justify-center items-center"
+                                >
+                                    {product.userId !== currentUser?.uid && (
+                                        <>
+                                            <button
+                                                onClick={() => addToCart(product)}
+                                                className="relative inline-flex items-center justify-center px-4 py-2 text-base font-semibold text-white transition-all duration-300 ease-in-out transform bg-gradient-to-r from-green-400 to-green-600 rounded-full shadow-md group hover:scale-105 hover:rotate-3 hover:shadow-xl"
+                                            >
+                                                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-green-500 to-green-700 opacity-20 group-hover:opacity-0 transition-all duration-300 rounded-full"></span>
+                                                <span className="absolute inset-0 w-full h-full border-2 border-green-500 rounded-full group-hover:border-transparent transition-all duration-300"></span>
+                                                <span className="relative z-10">Купи сега</span>
+                                            </button>
+                                        </>
+                                    )}
 
 
-                                {product.userId !== currentUser?.uid && (
-                                    <>
-                                        <button
-                                            onClick={() => addToCart(product)}
-                                            className="relative inline-flex items-center justify-center px-4 py-2 text-base font-semibold text-white transition-all duration-300 ease-in-out transform bg-gradient-to-r from-green-400 to-green-600 rounded-full shadow-md group hover:scale-105 hover:rotate-3 hover:shadow-xl"
-                                        >
-                                            <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-green-500 to-green-700 opacity-20 group-hover:opacity-0 transition-all duration-300 rounded-full"></span>
-                                            <span className="absolute inset-0 w-full h-full border-2 border-green-500 rounded-full group-hover:border-transparent transition-all duration-300"></span>
-                                            <span className="relative z-10">Купи сега</span>
-                                        </button>
-                                    </>
-                                )}
+                                    <LikeButton productId={product.id} likedBy={product.likedBy || []} userId={product.userId} />
+
+
+                                </div>
                             </>
                         )}
                     </div>
