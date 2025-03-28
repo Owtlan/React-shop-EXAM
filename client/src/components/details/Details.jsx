@@ -100,7 +100,7 @@ export default function Details() {
 
     return (
         <>
-            <div className="container mx-auto p-8 flex flex-col items-center mt-3 max-w-xl">
+            <div className="container mx-auto px-8 pt-20 flex flex-col items-center mt-3 max-w-xl">
                 <img src={selectedColorImage || selectImage} alt={product.name} className="w-full h-64 object-contain rounded" />
                 <h2 className="text-2xl font-semibold mt-4">{product.name}</h2>
                 <p className="text-gray-600 mt-2">{product.description}</p>
