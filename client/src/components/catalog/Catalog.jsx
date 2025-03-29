@@ -77,14 +77,14 @@ export default function Catalog({ category, showLiked, ratingFilter, searchQuery
     return (
         <div className="container mx-auto animate__animated animate__fadeIn pt-20 sm:pt-7">
             <h2 className="text-3xl font-semibold text-center mb-6 sm:pt-10 animate__animated animate__pulse
-  text-indigo-800 dark:text-indigo-300 
-  dark:border-b-2 dark:border-indigo-300
-  border-b-2 border-indigo-800
-  bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 
-  text-transparent bg-clip-text">
+                  text-indigo-800 dark:text-indigo-300 
+                  dark:border-b-2 dark:border-indigo-300
+                  border-b-2 border-indigo-800
+                  bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 
+                  text-transparent bg-clip-text">
                 Каталог
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6 px-5">
+            <div className="px-5 sm:px-0 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6">
                 {currentProducts.map((product) => (
                     <div key={product.id} className="bg-white p-4 shadow-lg rounded-lg
                   text-sm sm:sm:text-lg relative flex flex-col justify-between animate__animated animate__fadeIn items-center gap-4">
