@@ -75,20 +75,27 @@ export default function Catalog({ category, showLiked, ratingFilter, searchQuery
     }
 
     return (
-        <div className="container mx-auto animate__animated animate__fadeIn pt-12 sm:pt-7">
-            <h2 className="text-3xl font-semibold text-center mb-6 text-sky-800 sm:pt-10 animate__animated animate__pulse">Каталог</h2>
-
+        <div className="container mx-auto animate__animated animate__fadeIn pt-20 sm:pt-7">
+            <h2 className="text-3xl font-semibold text-center mb-6 sm:pt-10 animate__animated animate__pulse
+  text-indigo-800 dark:text-indigo-300 
+  dark:border-b-2 dark:border-indigo-300
+  border-b-2 border-indigo-800
+  bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 
+  text-transparent bg-clip-text">
+                Каталог
+            </h2>
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6 px-5">
                 {currentProducts.map((product) => (
                     <div key={product.id} className="bg-white p-4 shadow-lg rounded-lg
-                  text-sm sm:sm:text-lg relative flex flex-col justify-between animate__animated animate__fadeIn
-                     ">
-                        
-                            <h3 className="font-semibold mt-3">{product.name}</h3>
-                            <img src={product.imageUrl} alt={product.name} className="w-full h-40 object-contain rounded" />
+                  text-sm sm:sm:text-lg relative flex flex-col justify-between animate__animated animate__fadeIn items-center gap-4">
 
-                        
-                        <div>
+                        <h3 className="font-semibold mt-3">{product.name}</h3>
+                        <img src={product.imageUrl} alt={product.name} className="w-full h-40 object-contain rounded" />
+
+
+                        <div
+                            className="flex flex-col items-center"
+                        >
                             <Link to={`/details/${product.id}`} className="">
                                 <button
                                     className="relative inline-flex items-center justify-center px-8 py-2.5 overflow-hidden tracking-tighter text-white bg-gray-800 rounded-md group"
