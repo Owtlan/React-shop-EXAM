@@ -17,7 +17,6 @@ export default function Home() {
     const [searchQuery, setSearchQuery] = useState('')
     const [filteredProducts, setFilteredProducts] = useState([])
 
-    // тест
     const [showMenCategories, setShowMenCategories] = useState(false)
     const [showWomenCategories, setShowWomenCategories] = useState(false)
 
@@ -130,9 +129,7 @@ export default function Home() {
 
                 </div>
 
-                {/* test buttons */}
                 <div className="flex flex-wrap justify-center gap-4 mb-8">
-                    {/* Button for Men's Products */}
                     <button
                         className="bg-gray-800 text-white text-lg font-semibold py-3 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:bg-gray-700 hover:scale-105 hover:shadow-2xl w-full sm:w-auto"
                         onClick={() => setShowMenCategories(!showMenCategories)}
@@ -140,7 +137,6 @@ export default function Home() {
                         Мъже
                     </button>
 
-                    {/* Button for Women's Products */}
                     <button
                         className="bg-gray-800 text-white text-lg font-semibold py-3 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:bg-gray-700 hover:scale-105 hover:shadow-2xl w-full sm:w-auto"
                         onClick={() => setShowWomenCategories(!showWomenCategories)}
@@ -188,7 +184,6 @@ export default function Home() {
                     )}
                 </div>
 
-                {/* Women's Categories */}
                 <div
                     className={`transition-all duration-500 ease-in-out overflow-hidden ${showWomenCategories ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}`}
                     style={{ transitionProperty: 'max-height, opacity' }}
@@ -222,7 +217,6 @@ export default function Home() {
                         </div>
                     )}
                 </div>
-                {/* Button for all products */}
                 <button
                     className="bg-gray-800 text-white text-lg font-semibold py-3 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:bg-gray-700 hover:scale-105 hover:shadow-2xl mt-8 w-full"
                     onClick={() => setCategory("")}

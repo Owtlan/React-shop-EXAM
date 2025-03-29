@@ -112,7 +112,7 @@ export default function Details() {
                             <button
                                 key={item.color}
                                 onClick={() => handleImageChange(item.color)}
-                                className={`${styles["color-filter-btn"]} ${item.color === selectedColorImage ? "bg-gray-500" : ""}`} // Приложи класовете от CSS модула
+                                className={`${styles["color-filter-btn"]} ${item.color === selectedColorImage ? "bg-gray-500" : ""}`}
                             >
                                 <img
                                     src={item.url}
