@@ -27,7 +27,7 @@ export default function Chat() {
         }
 
         if (userId) {
-            fetchUserData();  // Зареждаме данните само ако имаме userId
+            fetchUserData(); 
         }
     }, [userId])
 
