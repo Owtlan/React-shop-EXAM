@@ -74,5 +74,13 @@ Explore in-depth information and features of each product.
  - **Deploy the application in a cloud (Heroku, Firebase)**
  - The application is hosted on Firebase, which is a cloud platform provided by Google, ensuring scalability and reliability.
 
+ ## Host
+
+ The React-Store platform is hosted on Firebase for both frontend and backend.
+
+ - Frontend: Hosted at https://react-shop-449a3.web.app
+
+ - Backend: Hosted as Firebase functions
+
 
 
