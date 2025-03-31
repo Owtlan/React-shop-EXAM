@@ -9,7 +9,7 @@ import ThemeToggle from "../../themetoggle/ThemeToggle";
 const Navbar = () => {
     const { isAuthenticated } = useContext(AuthContext);
     const { cart, removeFromCart } = useCart();
-    const auth = getAuth(); 
+    const auth = getAuth();
 
 
     const [showNavBar, setShowNavBar] = useState(true);
@@ -113,8 +113,8 @@ const Navbar = () => {
                 )}
                 {!isAuthenticated && (
                     <>
-                        <li><Link to="/register" className="bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 transition-colors">Регистрация</Link></li>
-                        <li><Link to="/login" className="bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 transition-colors">Вход</Link></li>
+                        <li><Link to="/register" className="md:bg-orange-500 text-white md:py-2 md:px-4 rounded-md hover:bg-orange-600 transition-colors">Регистрация</Link></li>
+                        <li className="mt-2 md:mt-0"><Link to="/login" className="bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 transition-colors">Вход</Link></li>
                     </>
                 )}
             </ul>
