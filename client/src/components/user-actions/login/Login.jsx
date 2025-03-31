@@ -51,7 +51,7 @@ export default function Login() {
     return (
         <>
             <div className="flex justify-center items-center min-h-screen bg-gradient-to-t from-[#e6e9f0] to-[#eef1f5]">
-                <div className="bg-white p-8 rounded-lg shadow-lg w-96">
+                <div className="bg-white p-8 rounded-lg shadow-lg w-96 animate__animated animate__pulse">
                     <h2 className="text-2xl font-semibold text-center">Вход</h2>
                     {error && <p className="text-red-500 text-center">{error}</p>}
 
