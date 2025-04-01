@@ -40,7 +40,7 @@ const Navbar = () => {
 
     return (
         <nav
-            className={`navbar flex flex-row justify-between lg:flex-row bg-gray-800 bg-opacity-90 p-4 fixed top-0 w-full transition-opacity duration-300 z-50 ${showNavBar ? "opacity-100" : "opacity-0"} ${isMenuOpen ? "navbar-open" : ""}`}
+            className={`navbar flex flex-row justify-between lg:flex-row bg-gray-800 bg-opacity-90 p-4 fixed top-0 w-full transition-opacity duration-300 z-50 gap-2 ${showNavBar ? "opacity-100" : "opacity-0"} ${isMenuOpen ? "navbar-open" : ""}`}
         >            {isMobile && (
             <div>
                 <button
@@ -63,13 +63,13 @@ const Navbar = () => {
         )}
 
             <ul className={`md:flex ${isMobile ? (isMenuOpen ? "flex flex-col" : "hidden") : "flex"} space-x-6 text-white`}>
-                <li><Link to="/" className="text-base sm:text-lg font-semibold hover:text-orange-500 transition-colors">Начало</Link></li>
-                <li><Link to="/catalog" className="text-base sm:text-lg font-semibold hover:text-orange-500 transition-colors">Каталог</Link></li>
+                <li><Link to="/" className="text-xs sm:text-lg font-semibold hover:text-orange-500 transition-colors">Начало</Link></li>
+                <li><Link to="/catalog" className="text-xs sm:text-lg font-semibold hover:text-orange-500 transition-colors">Каталог</Link></li>
 
                 {isAuthenticated && (
                     <>
-                        <li><Link to="/create" className="text-base sm:text-lg font-semibold hover:text-orange-500 transition-colors">Създай</Link></li>
-                        <li><Link to="/users" className="text-base sm:text-lg font-semibold hover:text-orange-500 transition-colors">Чат с Потребители</Link></li>
+                        <li><Link to="/create" className="text-xs sm:text-lg font-semibold hover:text-orange-500 transition-colors">Създай</Link></li>
+                        <li><Link to="/users" className="text-xs sm:text-lg font-semibold hover:text-orange-500 transition-colors">Чат с Потребители</Link></li>
 
                         <li className="relative group">
                             <Link to="/checkout" className="relative">
