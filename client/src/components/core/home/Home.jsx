@@ -81,9 +81,9 @@ export default function Home() {
 
     return (
 
-        <div className="flex min-h-screen sm:pt-10 lg:pt-0 animate__animated animate__fadeIn">
+        <div className="flex flex-col sm:flex-row min-h-screen sm:pt-10 lg:pt-0 animate__animated animate__fadeIn">
 
-            <div className="w-2/6 sm:w-1/4 md:w-1/4 lg:w-1/6 p-4 bg-gray-100 min-h-screen pt-12 sm:pt-10">
+            <div className="w-full sm:w-1/4 md:w-1/4 lg:w-1/6 p-4 min-h-screen pt-12 sm:pt-10 mt-12 sm:mt-0">
                 <div className="max-w-xs mx-auto">
 
                     <Search onSearch={handleSearch} searchQuery={searchQuery} handleClear={handleClear} />
@@ -91,7 +91,7 @@ export default function Home() {
                     <h3 className="sm:text-xl text-base font-bold mb-4">Филтриране</h3>
 
                     <button
-                        className="group flex w-full cursor-pointer items-center gap-2 overflow-hidden border rounded-full border-pink-700 fill-none p-2 px-3 font-extrabold text-pink-500 transition-all active:scale-90 peer-checked:fill-pink-500 peer-checked:hover:text-white text-xs sm:text-sm md:text-sm lg:text-sm xl:text-base"
+                        className="group flex w-full cursor-pointer items-center gap-2 overflow-hidden border rounded-full border-pink-700 fill-none p-2 px-3 font-extrabold text-pink-500 transition-all active:scale-90 peer-checked:fill-pink-500 peer-checked:hover:text-white text-xs sm:text-sm md:text-sm lg:text-sm xl:text-base justify-center"
                         onClick={() => setShowLiked(!showLiked)}
                     >
                         <div className="z-10 transition group-hover:translate-x-4">Само харесаните</div>
@@ -121,24 +121,24 @@ export default function Home() {
                             onClick={() => setRatingFilter(ratingFilter?.[0] === min ? null : [min, max])}
                         >
                             <div className="flex items-center justify-center space-x-3">
-                                <StarIcon style={{ fontSize: '28px', color: ratingFilter?.[0] === min ? 'yellow' : 'gray' }} />
-                                <span className="text-xl font-semibold">{min}-{max}</span>
+                                <StarIcon style={{ fontSize: '20px', color: ratingFilter?.[0] === min ? 'yellow' : 'gray' }} />
+                                <span className="sm:text-xl font-semibold">{min}-{max}</span>
                             </div>
                         </button>
                     ))}
 
                 </div>
 
-                <div className="flex flex-wrap justify-center gap-4 mb-8">
+                <div className="flex flex-wrap justify-center gap-4 mb-8 mx-20 sm:mx-0">
                     <button
-                        className="bg-gray-800 text-white text-lg font-semibold py-3 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:bg-gray-700 hover:scale-105 hover:shadow-2xl w-full sm:w-auto"
+                        className="bg-gray-800 text-white text-sm md:text-lg font-semibold py-3 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:bg-gray-700 hover:scale-105 hover:shadow-2xl w-full sm:w-auto"
                         onClick={() => setShowMenCategories(!showMenCategories)}
                     >
                         Мъже
                     </button>
 
                     <button
-                        className="bg-gray-800 text-white text-lg font-semibold py-3 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:bg-gray-700 hover:scale-105 hover:shadow-2xl w-full sm:w-auto"
+                        className="bg-gray-800 text-white text-sm md:text-lg font-semibold py-3 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:bg-gray-700 hover:scale-105 hover:shadow-2xl w-full sm:w-auto"
                         onClick={() => setShowWomenCategories(!showWomenCategories)}
                     >
                         Жени
@@ -155,27 +155,27 @@ export default function Home() {
 
                     {/* Men's Categories */}
                     {showMenCategories && (
-                        <div className="flex flex-col w-full pt-6 space-y-4 mx-auto bg-white rounded-lg shadow-md p-6">
+                        <div className="flex flex-col w-full pt-6 space-y-4 mx-auto bg-white rounded-lg shadow-md  p-2 sm:p-6 mb-8">
                             <button
-                                className="bg-transparent border-2 border-gray-800 text-gray-800 font-medium py-3 px-6 rounded-lg hover:bg-gray-100 transition-all duration-300"
+                                className="bg-transparent border-2 border-gray-800 text-gray-800 font-bold sm:font-medium text-sm py-2 px-2 sm:text-base sm:py-3 sm:px-2 rounded-lg hover:bg-gray-100 transition-all duration-300 mx-20 sm:mx-0"
                                 onClick={() => setCategory("Мъжки Обувки")}
                             >
                                 Мъжки Обувки
                             </button>
                             <button
-                                className="bg-transparent border-2 border-gray-800 text-gray-800 font-medium py-3 px-6 rounded-lg hover:bg-gray-100 transition-all duration-300"
+                                className="bg-transparent border-2 border-gray-800 text-gray-800 font-bold sm:font-medium text-sm py-2 px-2 sm:text-base sm:py-3 sm:px-2 rounded-lg hover:bg-gray-100 transition-all duration-300 mx-20 sm:mx-0"
                                 onClick={() => setCategory("Мъжки Якета")}
                             >
                                 Мъжки Якета
                             </button>
                             <button
-                                className="bg-transparent border-2 border-gray-800 text-gray-800 font-medium py-3 px-6 rounded-lg hover:bg-gray-100 transition-all duration-300"
+                                className="bg-transparent border-2 border-gray-800 text-gray-800 font-bold sm:font-medium text-sm py-2 px-2 sm:text-base sm:py-3 sm:px-2 rounded-lg hover:bg-gray-100 transition-all duration-300 mx-20 sm:mx-0"
                                 onClick={() => setCategory("Мъжки Тениски")}
                             >
                                 Мъжки Тениски
                             </button>
                             <button
-                                className="bg-transparent border-2 border-gray-800 text-gray-800 font-medium py-3 px-6 rounded-lg hover:bg-gray-100 transition-all duration-300"
+                                className="bg-transparent border-2 border-gray-800 text-gray-800 font-bold sm:font-medium text-sm py-2 px-2 sm:text-base sm:py-3 sm:px-2 rounded-lg hover:bg-gray-100 transition-all duration-300 mx-20 sm:mx-0"
                                 onClick={() => setCategory("Мъжки Дънки")}
                             >
                                 Мъжки Дънки
@@ -185,31 +185,31 @@ export default function Home() {
                 </div>
 
                 <div
-                    className={`transition-all duration-500 ease-in-out overflow-hidden ${showWomenCategories ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}`}
+                    className={`transition-all duration-500 ease-in-out overflow-hidden ${showWomenCategories ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'} mb-8`}
                     style={{ transitionProperty: 'max-height, opacity' }}
                 >
                     {showWomenCategories && (
-                        <div className="flex flex-col w-full pt-6 space-y-4 mx-auto bg-white rounded-lg shadow-md p-6">
+                        <div className="flex flex-col w-full pt-6 space-y-4 mx-auto bg-white rounded-lg shadow-md p-2 sm:p-6">
                             <button
-                                className="bg-transparent border-2 border-gray-800 text-gray-800 font-medium py-3 px-6 rounded-lg hover:bg-gray-100 transition-all duration-300"
+                                className="bg-transparent border-2 border-gray-800 text-gray-800 font-bold sm:font-medium  text-sm py-2 px-2 sm:text-base sm:py-3 sm:px-2 rounded-lg hover:bg-gray-100 transition-all duration-300 mx-20 sm:mx-0"
                                 onClick={() => setCategory("Женски Обувки")}
                             >
                                 Женски Обувки
                             </button>
                             <button
-                                className="bg-transparent border-2 border-gray-800 text-gray-800 font-medium py-3 px-6 rounded-lg hover:bg-gray-100 transition-all duration-300"
+                                className="bg-transparent border-2 border-gray-800 text-gray-800 font-bold sm:font-medium  text-sm py-2 px-2 sm:text-base sm:py-3 sm:px-2 rounded-lg hover:bg-gray-100 transition-all duration-300 mx-20 sm:mx-0"
                                 onClick={() => setCategory("Женски Якета")}
                             >
                                 Женски Якета
                             </button>
                             <button
-                                className="bg-transparent border-2 border-gray-800 text-gray-800 font-medium py-3 px-6 rounded-lg hover:bg-gray-100 transition-all duration-300"
+                                className="bg-transparent border-2 border-gray-800 text-gray-800 font-bold sm:font-medium  text-sm py-2 px-2 sm:text-base sm:py-3 sm:px-2 rounded-lg hover:bg-gray-100 transition-all duration-300 mx-20 sm:mx-0"
                                 onClick={() => setCategory("Женски Тениски")}
                             >
                                 Женски Тениски
                             </button>
                             <button
-                                className="bg-transparent border-2 border-gray-800 text-gray-800 font-medium py-3 px-6 rounded-lg hover:bg-gray-100 transition-all duration-300"
+                                className="bg-transparent border-2 border-gray-800 text-gray-800 font-bold sm:font-medium  text-sm py-2 px-2 sm:text-base sm:py-3 sm:px-2 rounded-lg hover:bg-gray-100 transition-all duration-300 mx-20 sm:mx-0"
                                 onClick={() => setCategory("Женски Дънки")}
                             >
                                 Женски Дънки
@@ -217,12 +217,14 @@ export default function Home() {
                         </div>
                     )}
                 </div>
-                <button
-                    className="bg-gray-800 text-white text-lg font-semibold py-3 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:bg-gray-700 hover:scale-105 hover:shadow-2xl mt-8 w-full"
-                    onClick={() => setCategory("")}
-                >
-                    Всички Продукти
-                </button>
+                <div className="mx-20 sm:mx-0">
+                    <button
+                        className="bg-gray-800 text-white text-sm md:text-lg font-semibold py-3 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:bg-gray-700 hover:scale-105 hover:shadow-2xl w-full sm:w-auto"
+                        onClick={() => setCategory("")}
+                    >
+                        Всички Продукти
+                    </button>
+                </div>
 
             </div>
 
