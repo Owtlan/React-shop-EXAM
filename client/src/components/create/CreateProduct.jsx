@@ -109,8 +109,8 @@ export default function CreateProduct() {
 
     return (
         <>
-            <div className="flex justify-center items-center min-h-screen bg-background-image: bg-gradient-to-t from-[#e6e9f0] to-[#eef1f5]">
-                <div className="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full">
+            <div className="flex justify-center items-center min-h-screen bg-background-image: bg-gradient-to-t from-[#e6e9f0] to-[#eef1f5] mt-10 lg:mt-0">
+                <div className="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full my-10">
                     <h2 className="text-3xl font-semibold text-center text-teal-700 mb-6">Добави нов продукт</h2>
                     {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
