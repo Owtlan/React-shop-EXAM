@@ -34,7 +34,7 @@ export default function Details() {
                 }
 
                 if (productData.colorImages && productData.colorImages.length > 0) {
-                    setSelectedColorImage(productData.imageUrl); 
+                    setSelectedColorImage(productData.imageUrl);
                 }
             } else {
                 console.error("Продуктът не съществува!");
@@ -48,7 +48,7 @@ export default function Details() {
             if (user) {
                 setCurrentUser(user);
             } else {
-                setCurrentUser(null); 
+                setCurrentUser(null);
             }
         });
 
@@ -62,9 +62,9 @@ export default function Details() {
         const selected = product.colorImages.find((img) => img.color === color);
 
         if (selected) {
-            setSelectedColorImage(selected.url); 
+            setSelectedColorImage(selected.url);
             setProduct(prevProduct => ({
-                
+
                 ...prevProduct,
                 name: `${prevProduct.name.split(' - ')[0]} - ${color}`
             }))
@@ -100,13 +100,13 @@ export default function Details() {
 
     return (
         <>
-            <div className="container mx-auto px-8 pt-20 flex flex-col items-center mt-3 max-w-xl">
+            <div className="container mx-auto px-8 pt-20 flex flex-col items-center mt-3 max-w-xl mb-10">
                 <img src={selectedColorImage || selectImage} alt={product.name} className="w-full h-64 object-contain rounded" />
                 <h2 className="text-2xl font-semibold mt-4">{product.name}</h2>
                 <p className="text-gray-600 mt-2">{product.description}</p>
                 <p className="text-lg front-bold text-blue-500 mt-2">{product.price} лв.</p>
 
-                <div className="mt-4 flex gap-2">
+                <div className="mt-4 flex gap-2 mb-4 md:mb-0">
                     {product.colorImages && product.colorImages.length > 0 ? (
                         product.colorImages.map((item) => (
                             <button
