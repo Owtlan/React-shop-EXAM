@@ -82,5 +82,20 @@ Explore in-depth information and features of each product.
 
  - Backend: Hosted as Firebase functions
 
+ ## used Libaries
+ 
+- **animate.css**
+- **@mui/icons-material**
+ used in HomePage adding good efect with stars
+
+- **axios**
+- **clsx**
+- **motion**
+- **react-icons**
+
+- **tailwindcss**
+- **react-router-dom**
+- **react-dom**
+- **firebase**
 
 
