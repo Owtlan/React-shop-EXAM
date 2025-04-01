@@ -217,7 +217,7 @@ export default function Home() {
                         </div>
                     )}
                 </div>
-                <div className="mx-20 sm:mx-0">
+                <div className="mx-20 sm:mx-0 flex justify-center">
                     <button
                         className="bg-gray-800 text-white text-sm md:text-lg font-semibold py-3 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:bg-gray-700 hover:scale-105 hover:shadow-2xl w-full sm:w-auto"
                         onClick={() => setCategory("")}
