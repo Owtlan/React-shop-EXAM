@@ -57,7 +57,7 @@ export default function Register() {
                 createdAt: new Date(),
                 isOnline: false,
             });
-            navigate('/')
+          navigate('/', { state: { email: user.email } })
 
         } catch (error) {
             console.error("Грешка при регистрацията: ", error.message);
