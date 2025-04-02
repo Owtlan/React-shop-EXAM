@@ -5,7 +5,7 @@ import { db, auth } from "../../../firebase-config";
 import Search from "../../search/Search";
 import { BackgroundBeamsWithCollision } from "../../ui/BackgroundBeamsWithCollision";
 import StarIcon from '@mui/icons-material/Star';
-
+import { useLocation } from "react-router-dom";
 
 export default function Home() {
     const [category, setCategory] = useState('');
@@ -20,8 +20,14 @@ export default function Home() {
     const [showMenCategories, setShowMenCategories] = useState(false)
     const [showWomenCategories, setShowWomenCategories] = useState(false)
 
+    const location = useLocation();
+    const [showWelcome, setShowWelcome] = useState(false);
+    const [email, setEmail] = useState('');
+    const [progress, setProgress] = useState(100);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 
+    
     useEffect(() => {
         const fetchProducts = async () => {
             setLoading(true);
@@ -45,6 +51,47 @@ export default function Home() {
 
         fetchProducts();
     }, []);
+
+
+
+    
+
+useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+        if (user) {
+            setEmail(user.email);
+            setIsLoggedIn(true);
+
+            const hasSeenWelcome = sessionStorage.getItem('hasSeenWelcome');
+            if (!hasSeenWelcome) {
+             
+                setShowWelcome(true);
+                sessionStorage.setItem('hasSeenWelcome', 'true');
+            }
+
+            setProgress(100); 
+            const progressInterval = setInterval(() => {
+                setProgress((prevProgress) => {
+                    if (prevProgress <= 0) {
+                        clearInterval(progressInterval);
+                        setShowWelcome(false); 
+                        return 0;
+                    }
+                    return prevProgress - 1;
+                });
+            }, 50);
+
+            return () => clearInterval(progressInterval); 
+        } else {
+            setIsLoggedIn(false);
+            setShowWelcome(false);
+            sessionStorage.removeItem('hasSeenWelcome'); 
+        }
+    });
+
+    return () => unsubscribe();
+}, []);
+
 
     useEffect(() => {
         if (searchQuery) {
@@ -230,6 +277,17 @@ export default function Home() {
 
             <BackgroundBeamsWithCollision>
                 <div className="flex-1 p-4 max-w-screen-lg mx-auto">
+                    {showWelcome && (
+                        <div className="welcome-message bg-green-500 text-white p-3 rounded-md shadow-md text-center mb-4 relative w-80 mx-auto">
+                            <h2 className="text-lg font-semibold">Добре дошли, {email}!</h2>
+                            <div className="mt-2 h-1 bg-gray-300 rounded-full">
+                                <div
+                                    className="h-full bg-gradient-to-r from-blue-500 to-pink-500"
+                                    style={{ width: `${progress}%`, transition: 'width 50ms' }}
+                                ></div>
+                            </div>
+                        </div>
+                    )}
                     <Catalog category={category} showLiked={showLiked} ratingFilter={ratingFilter} searchQuery={searchQuery} />
                 </div>
             </BackgroundBeamsWithCollision>
