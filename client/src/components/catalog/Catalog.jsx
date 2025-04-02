@@ -15,6 +15,17 @@ export default function Catalog({ category, showLiked, ratingFilter, searchQuery
     const [currentUser, setCurrentUser] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
 
+    const [purchaseMessage, setPurchaseMessage] = useState(null);
+
+    const handleBuyNow = (product) => {
+        addToCart(product); 
+        setPurchaseMessage(`Благодаря, че закупихте този продукт! Продуктът, който закупихте е: ${product.name}`);
+
+        setTimeout(() => {
+            setPurchaseMessage(null);
+        }, 5000);
+    };
+
     const productsPerPage = 8;
 
     useEffect(() => {
@@ -84,6 +95,13 @@ export default function Catalog({ category, showLiked, ratingFilter, searchQuery
                   text-transparent bg-clip-text">
                 Каталог
             </h2>
+
+            {purchaseMessage && (
+                <div className="bg-green-200 text-green-800 p-4 rounded-md mb-6 text-center">
+                    {purchaseMessage}
+                </div>
+            )}
+
             <div className="px-5 sm:px-0 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6">
                 {currentProducts.map((product) => (
                     <div key={product.id} className="bg-white p-4 shadow-lg rounded-lg
@@ -92,10 +110,7 @@ export default function Catalog({ category, showLiked, ratingFilter, searchQuery
                         <h3 className="font-semibold mt-3">{product.name}</h3>
                         <img src={product.imageUrl} alt={product.name} className="w-full h-40 object-contain rounded" />
 
-
-                        <div
-                            className="flex flex-col items-center"
-                        >
+                        <div className="flex flex-col items-center">
                             <Link to={`/details/${product.id}`} className="">
                                 <button
                                     className="relative inline-flex items-center justify-center px-8 py-2.5 overflow-hidden tracking-tighter text-white bg-gray-800 rounded-md group"
@@ -124,26 +139,19 @@ export default function Catalog({ category, showLiked, ratingFilter, searchQuery
 
                         {currentUser && (
                             <>
-                                <div
-                                    className="flex flex-col justify-center items-center"
-                                >
+                                <div className="flex flex-col justify-center items-center">
                                     {product.userId !== currentUser?.uid && (
-                                        <>
-                                            <button
-                                                onClick={() => addToCart(product)}
-                                                className="relative inline-flex items-center justify-center px-4 py-2 text-base font-semibold text-white transition-all duration-300 ease-in-out transform bg-gradient-to-r from-green-400 to-green-600 rounded-full shadow-md group hover:scale-105 hover:rotate-3 hover:shadow-xl"
-                                            >
-                                                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-green-500 to-green-700 opacity-20 group-hover:opacity-0 transition-all duration-300 rounded-full"></span>
-                                                <span className="absolute inset-0 w-full h-full border-2 border-green-500 rounded-full group-hover:border-transparent transition-all duration-300"></span>
-                                                <span className="relative z-10">Купи сега</span>
-                                            </button>
-                                        </>
+                                        <button
+                                            onClick={() => handleBuyNow(product)}
+                                            className="relative inline-flex items-center justify-center px-4 py-2 text-base font-semibold text-white transition-all duration-300 ease-in-out transform bg-gradient-to-r from-green-400 to-green-600 rounded-full shadow-md group hover:scale-105 hover:rotate-3 hover:shadow-xl"
+                                        >
+                                            <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-green-500 to-green-700 opacity-20 group-hover:opacity-0 transition-all duration-300 rounded-full"></span>
+                                            <span className="absolute inset-0 w-full h-full border-2 border-green-500 rounded-full group-hover:border-transparent transition-all duration-300"></span>
+                                            <span className="relative z-10">Купи сега</span>
+                                        </button>
                                     )}
 
-
                                     <LikeButton productId={product.id} likedBy={product.likedBy || []} userId={product.userId} />
-
-
                                 </div>
                             </>
                         )}
@@ -151,12 +159,10 @@ export default function Catalog({ category, showLiked, ratingFilter, searchQuery
                 ))}
             </div>
 
-            < div className="flex justify-center mt-4 mb-4" >
-
+            <div className="flex justify-center mt-4 mb-4">
                 <button
                     onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                     className="px-4 py-2 bg-gray-800 text-white rounded-lg mr-2"
-
                 >
                     Предишна
                 </button>
@@ -178,6 +184,6 @@ export default function Catalog({ category, showLiked, ratingFilter, searchQuery
                     Следваща
                 </button>
             </div>
-        </div >
+        </div>
     );
 }
