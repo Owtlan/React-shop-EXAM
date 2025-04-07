@@ -27,7 +27,7 @@ export default function Home() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 
-    
+
     useEffect(() => {
         const fetchProducts = async () => {
             setLoading(true);
@@ -53,44 +53,41 @@ export default function Home() {
     }, []);
 
 
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (user) {
+                setEmail(user.email);
+                setIsLoggedIn(true);
 
-    
+                const hasSeenWelcome = sessionStorage.getItem('hasSeenWelcome');
+                if (!hasSeenWelcome) {
 
-useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-        if (user) {
-            setEmail(user.email);
-            setIsLoggedIn(true);
+                    setShowWelcome(true);
+                    sessionStorage.setItem('hasSeenWelcome', 'true');
+                }
 
-            const hasSeenWelcome = sessionStorage.getItem('hasSeenWelcome');
-            if (!hasSeenWelcome) {
-             
-                setShowWelcome(true);
-                sessionStorage.setItem('hasSeenWelcome', 'true');
+                setProgress(100);
+                const progressInterval = setInterval(() => {
+                    setProgress((prevProgress) => {
+                        if (prevProgress <= 0) {
+                            clearInterval(progressInterval);
+                            setShowWelcome(false);
+                            return 0;
+                        }
+                        return prevProgress - 1;
+                    });
+                }, 50);
+
+                return () => clearInterval(progressInterval);
+            } else {
+                setIsLoggedIn(false);
+                setShowWelcome(false);
+                sessionStorage.removeItem('hasSeenWelcome');
             }
+        });
 
-            setProgress(100); 
-            const progressInterval = setInterval(() => {
-                setProgress((prevProgress) => {
-                    if (prevProgress <= 0) {
-                        clearInterval(progressInterval);
-                        setShowWelcome(false); 
-                        return 0;
-                    }
-                    return prevProgress - 1;
-                });
-            }, 50);
-
-            return () => clearInterval(progressInterval); 
-        } else {
-            setIsLoggedIn(false);
-            setShowWelcome(false);
-            sessionStorage.removeItem('hasSeenWelcome'); 
-        }
-    });
-
-    return () => unsubscribe();
-}, []);
+        return () => unsubscribe();
+    }, []);
 
 
     useEffect(() => {
