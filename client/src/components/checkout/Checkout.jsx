@@ -103,7 +103,7 @@ const Checkout = () => {
                                     <p className="text-sm font-semibold">{product.totalPrice.toFixed(2)} лв.</p> 
                                     <button
                                         onClick={() => removeFromCart(product.id)}
-                                        className="relative border-2 border-black group hover:border-green-500 w-12 h-12 duration-500 overflow-hidden"
+                                        className="relative border-2 border-black group hover:border-green-600 w-12 h-12 duration-500 overflow-hidden"
                                         type="button"
                                     >
                                         <p className="text-3xl h-full w-full flex items-center justify-center text-black duration-500 relative z-10 group-hover:scale-0">
