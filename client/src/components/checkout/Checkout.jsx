@@ -61,7 +61,7 @@ const Checkout = () => {
                 createdAt: new Date(),
             })
 
-            alert("Вашата поръчка беше направена успешно!");
+            alert("Вашата поръчка беше направена успешно благодаря!");
             clearCart()
             navigate("/");
         } catch (error) {
